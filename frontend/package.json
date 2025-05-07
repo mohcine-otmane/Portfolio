@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mohcine-otmane.github.io/React-Portfolio",
+  "homepage": "https://mohcine-otmane.github.io/react-portfolio.github.io",
   "dependencies": {
     "@heroicons/react": "^2.1.1",
     "cra-template": "1.3.0",
