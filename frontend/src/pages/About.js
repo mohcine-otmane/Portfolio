@@ -1,4 +1,5 @@
 import React from 'react';
+import IconShowcase from '../components/IconShowcase';
 
 const About = () => {
   const skills = [
@@ -57,6 +58,14 @@ const About = () => {
               <p className="mt-2 text-indigo-100">Developed and maintained web applications using modern JavaScript frameworks. Collaborated with design team to implement responsive UI components.</p>
             </div>
           </div>
+        </div>
+      </div>
+      
+      {/* Icon Showcase Section */}
+      <div className="w-full mt-16">
+        <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl shadow-2xl border border-indigo-400/30 p-10">
+          <h3 className="text-2xl font-bold text-white mb-8 drop-shadow text-center">Tools & Technologies</h3>
+          <IconShowcase />
         </div>
       </div>
     </div>

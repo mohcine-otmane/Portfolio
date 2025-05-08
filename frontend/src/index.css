@@ -36,7 +36,7 @@
 @layer components {
   /* Enhanced Glass Effects */
   .glass-card {
-    @apply bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-lg border border-border/60 shadow-lg text-white rounded-xl relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/10;
+    @apply bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-lg border border-glass-border shadow-lg text-white rounded-xl relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/10;
   }
 
   .glass-card::before {
@@ -60,7 +60,7 @@
   }
 
   .glass-bg {
-    @apply bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm border border-border/40 text-white rounded-xl relative overflow-hidden;
+    @apply bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm border border-glass-border text-white rounded-xl relative overflow-hidden;
   }
 
   .glass-bg::before {
@@ -84,7 +84,7 @@
   }
 
   .glass-border {
-    @apply border-2 border-border/40 rounded-xl relative overflow-hidden;
+    @apply border-2 border-glass-border rounded-xl relative overflow-hidden;
   }
 
   .glass-border::before {
@@ -228,7 +228,7 @@
 
   /* Enhanced Form Elements */
   .input {
-    @apply bg-muted/50 backdrop-blur-sm border-2 border-border rounded-xl px-4 py-3 
+    @apply bg-muted backdrop-blur-sm border-2 border-border rounded-xl px-4 py-3 
            focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent 
            text-white placeholder-white/50 transition-all duration-300 relative overflow-hidden
            hover:border-primary/50 focus:border-primary;
