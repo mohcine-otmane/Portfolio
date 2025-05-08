@@ -227,7 +227,7 @@ const Navbar = () => {
           {/* Navigation Items */}
           <div className="flex flex-col space-y-8 w-full px-2">
             {navItems.map((item, index) => (
-              <Link
+            <Link
                 key={index}
                 to={item.path}
                 className={`group relative flex items-center justify-center ${activeItem === item.path ? 'scale-110' : ''}`}
@@ -237,7 +237,7 @@ const Navbar = () => {
                 }}
                 onMouseEnter={() => setHoveredItem(item.path)}
                 onMouseLeave={() => setHoveredItem(null)}
-              >
+            >
                 <div 
                   className={`p-3 rounded-xl ${item.bgColor} ${item.hoverBgColor} transition-all duration-300 ${item.glowColor} group-hover:shadow-lg relative overflow-hidden`}
                   style={getLightStyle(this)}
@@ -246,11 +246,11 @@ const Navbar = () => {
                     {item.icon}
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:translate-x-full"></div>
-                </div>
+              </div>
                 <span className={`absolute left-full ml-2 px-2 py-1 bg-white/10 backdrop-blur-sm rounded-lg text-sm font-medium text-white opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap transform group-hover:translate-x-1 ${hoveredItem === item.path ? 'animate-fadeIn' : ''}`}>
                   {item.label}
-                </span>
-              </Link>
+              </span>
+            </Link>
             ))}
           </div>
 
@@ -262,19 +262,19 @@ const Navbar = () => {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex items-center justify-center"
+              className="group relative flex items-center justify-center"
                 onMouseEnter={() => setHoveredItem(`social-${index}`)}
                 onMouseLeave={() => setHoveredItem(null)}
-              >
+            >
                 <div 
                   className={`p-2 rounded-xl ${item.bgColor} ${item.hoverBgColor} transition-all duration-300 ${item.glowColor} group-hover:shadow-lg relative overflow-hidden`}
                   style={getLightStyle(this)}
-                >
+            >
                   <div className={`${item.color} ${item.hoverColor} transform group-hover:scale-110 transition-all duration-300 ${item.animation}`}>
                     {item.icon}
-                  </div>
+              </div>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:translate-x-full"></div>
-                </div>
+              </div>
               </a>
             ))}
           </div>

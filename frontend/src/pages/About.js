@@ -1,71 +1,141 @@
 import React from 'react';
-import IconShowcase from '../components/IconShowcase';
+import { FaCode, FaServer, FaGraduationCap, FaRocket, FaLaptopCode, FaDatabase, FaTools, FaLightbulb } from 'react-icons/fa';
 
 const About = () => {
+  const sections = [
+    {
+      icon: <FaCode className="w-8 h-8" />,
+      title: 'Development Philosophy',
+      description: 'I believe in writing clean, maintainable code that solves real-world problems. My approach combines technical excellence with practical solutions, always keeping the end user in mind.',
+      color: 'text-blue-400',
+    },
+    {
+      icon: <FaServer className="w-8 h-8" />,
+      title: 'Technical Expertise',
+      description: 'With expertise in both frontend and backend development, I create seamless, full-stack solutions. I specialize in modern JavaScript frameworks, cloud architecture, and scalable applications.',
+      color: 'text-purple-400',
+    },
+    {
+      icon: <FaGraduationCap className="w-8 h-8" />,
+      title: 'Background',
+      description: "My journey in software development began with a passion for creating impactful solutions. Through continuous learning and hands-on experience, I have developed a strong foundation in modern web technologies.",
+      color: 'text-green-400',
+    },
+    {
+      icon: <FaRocket className="w-8 h-8" />,
+      title: 'Current Focus',
+      description: "I'm currently focused on building scalable web applications and exploring emerging technologies. My goal is to create innovative solutions that make a difference.",
+      color: 'text-yellow-400',
+    },
+  ];
+
   const skills = [
-    { name: 'React', level: '90%' },
-    { name: 'JavaScript', level: '85%' },
-    { name: 'Node.js', level: '80%' },
-    { name: 'MongoDB', level: '75%' },
-    { name: 'HTML/CSS', level: '95%' },
+    {
+      category: 'Frontend Development',
+      icon: <FaLaptopCode className="w-6 h-6" />,
+      items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
+    },
+    {
+      category: 'Backend Development',
+      icon: <FaServer className="w-6 h-6" />,
+      items: ['Node.js', 'Express', 'Python', 'Django'],
+    },
+    {
+      category: 'Database & Cloud',
+      icon: <FaDatabase className="w-6 h-6" />,
+      items: ['MongoDB', 'PostgreSQL', 'AWS', 'Docker'],
+    },
+    {
+      category: 'Tools & Practices',
+      icon: <FaTools className="w-6 h-6" />,
+      items: ['Git', 'CI/CD', 'Agile', 'Testing'],
+    },
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col items-center">
-      <div className="relative mb-12 w-full flex flex-col items-center">
-        <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 z-10">
-          <div className="bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 p-1 rounded-full shadow-2xl">
-            <img
-              src="https://randomuser.me/api/portraits/men/32.jpg"
-              alt="Profile"
-              className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-xl"
-            />
-          </div>
+    <div className="min-h-screen py-20 relative">
+      {/* Background gradient circles */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/10 rounded-full filter blur-3xl translate-x-1/2 translate-y-1/2" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* Hero Section */}
+        <div className="text-center mb-16 animate-slideInDown">
+          <h1 className="text-4xl font-extrabold text-white mb-4">
+            About <span className="gradient-text">Me</span>
+          </h1>
+          <p className="text-gray-300 max-w-2xl mx-auto">
+            A passionate full-stack developer dedicated to creating innovative solutions and delivering exceptional user experiences.
+          </p>
         </div>
-        <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl shadow-2xl border border-indigo-400/30 p-10 pt-20 w-full md:w-2/3 flex flex-col items-center">
-          <h2 className="text-3xl font-extrabold text-white sm:text-4xl drop-shadow-lg mb-2">About Me</h2>
-          <p className="mt-2 text-lg text-indigo-100 text-center max-w-2xl">I'm a passionate full-stack developer with a strong foundation in web technologies and a keen eye for creating intuitive user experiences.</p>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Left Column - About Sections */}
+          <div className="space-y-8">
+            {sections.map((section, index) => (
+              <div
+                key={section.title}
+                className="glass-card p-8 animate-fadeIn"
+                style={{ animationDelay: `${index * 200}ms` }}
+              >
+                <div className="flex items-start gap-4">
+                  <div className={`${section.color} p-3 rounded-lg bg-background/50`}>
+                    {section.icon}
         </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full mt-8">
-        <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl shadow-2xl border border-indigo-400/30 p-10 hover:scale-105 transition-transform duration-300">
-          <h3 className="text-2xl font-bold text-white mb-6 drop-shadow">Skills</h3>
-          <div className="space-y-4">
-            {skills.map((skill) => (
-              <div key={skill.name}>
-                <div className="flex justify-between mb-1">
-                  <span className="text-base font-medium text-indigo-100">{skill.name}</span>
-                  <span className="text-sm font-medium text-indigo-100">{skill.level}</span>
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-3">{section.title}</h3>
+                    <p className="text-gray-300">{section.description}</p>
                 </div>
-                <div className="w-full bg-gradient-to-r from-indigo-400/30 via-purple-400/30 to-pink-400/30 rounded-full h-2.5">
-                  <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-2.5 rounded-full" style={{ width: skill.level }}></div>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-        <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl shadow-2xl border border-indigo-400/30 p-10 flex flex-col justify-center hover:scale-105 transition-transform duration-300">
-          <h3 className="text-2xl font-bold text-white mb-6 drop-shadow">Experience</h3>
+
+          {/* Right Column - Skills & Additional Info */}
           <div className="space-y-8">
-            <div>
-              <h4 className="text-xl font-semibold text-white">Senior Developer</h4>
-              <p className="text-indigo-200">Company Name • 2020 - Present</p>
-              <p className="mt-2 text-indigo-100">Led development of multiple web applications using React and Node.js. Implemented CI/CD pipelines and improved application performance by 40%.</p>
+            {/* Skills Section */}
+            <div className="glass-card p-8 animate-fadeIn delay-200">
+              <h3 className="text-2xl font-semibold text-white mb-6">Technical Skills</h3>
+              <div className="space-y-6">
+                {skills.map((skillGroup) => (
+                  <div key={skillGroup.category} className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <div className="text-primary">{skillGroup.icon}</div>
+                      <h4 className="text-lg font-medium text-white">{skillGroup.category}</h4>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {skillGroup.items.map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-3 py-1 text-sm bg-background/50 text-gray-300 rounded-full border border-glass-border"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Personal Statement */}
+            <div className="glass-card p-8 animate-fadeIn delay-300">
+              <div className="flex items-start gap-4">
+                <div className="text-yellow-400 p-3 rounded-lg bg-background/50">
+                  <FaLightbulb className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-xl font-semibold text-white">Full Stack Developer</h4>
-              <p className="text-indigo-200">Previous Company • 2018 - 2020</p>
-              <p className="mt-2 text-indigo-100">Developed and maintained web applications using modern JavaScript frameworks. Collaborated with design team to implement responsive UI components.</p>
+                  <h3 className="text-xl font-semibold text-white mb-3">Personal Statement</h3>
+                  <p className="text-gray-300">
+                    I'm driven by the challenge of solving complex problems and creating elegant solutions. 
+                    My approach combines technical expertise with creative thinking, always focusing on 
+                    delivering value through clean, efficient code and intuitive user experiences.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      
-      {/* Icon Showcase Section */}
-      <div className="w-full mt-16">
-        <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl shadow-2xl border border-indigo-400/30 p-10">
-          <h3 className="text-2xl font-bold text-white mb-8 drop-shadow text-center">Tools & Technologies</h3>
-          <IconShowcase />
         </div>
       </div>
     </div>

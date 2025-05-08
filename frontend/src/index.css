@@ -79,8 +79,6 @@
     mask-composite: exclude;
     padding: 1px;
     filter: blur(0.5px);
-    animation: edge-shine-360 8s linear infinite;
-    will-change: transform;
   }
 
   .glass-bg {
@@ -104,7 +102,6 @@
     mask-composite: exclude;
     padding: 1px;
     filter: blur(0.5px);
-    animation: edge-shine-360 4s linear infinite;
   }
 
   .glass-border {
@@ -128,7 +125,6 @@
     mask-composite: exclude;
     padding: 2px;
     filter: blur(0.5px);
-    animation: edge-shine-360 4s linear infinite;
   }
 
   /* Enhanced Gradients */
@@ -174,7 +170,6 @@
       transparent 60%,
       transparent 100%
     );
-    animation: metal-shine 3s linear infinite;
   }
 
   .hover-gradient {
@@ -214,8 +209,6 @@
     mask-composite: exclude;
     padding: 1px;
     filter: blur(0.5px);
-    animation: edge-shine-360 8s linear infinite;
-    will-change: transform;
   }
 
   .btn-primary {
@@ -251,19 +244,10 @@
     mask-composite: exclude;
     padding: 2px;
     filter: blur(0.5px);
-    animation: edge-shine-360 4s linear infinite;
   }
 
-  /* Enhanced Form Elements */
-  .input {
-    @apply bg-muted backdrop-blur-sm border-2 border-border rounded-xl px-4 py-3 
-           focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent 
-           text-white placeholder-white/50 transition-all duration-300 relative overflow-hidden
-           hover:border-primary/50 focus:border-primary;
-  }
-
-  .input:focus {
-    @apply shadow-lg shadow-primary/10;
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-[1.02];
   }
 
   /* Cards */
@@ -324,12 +308,6 @@
 
   .hover-glow {
     @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/20;
-  }
-
-  .hover-scale {
-    @apply transition-transform duration-300;
-    transform: translateZ(0);
-    will-change: transform;
   }
 
   .hover-rotate {
@@ -413,96 +391,50 @@
   }
 }
 
-/* Animations */
-@keyframes blob {
-  0% {
-    transform: translate(0px, 0px) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-  100% {
-    transform: translate(0px, 0px) scale(1);
-  }
+/* Remove unused animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@keyframes metal-shine {
-  0% {
-    transform: translateX(-100%) translateY(-100%) rotate(45deg);
-  }
-  100% {
-    transform: translateX(100%) translateY(100%) rotate(45deg);
-  }
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
-@keyframes edge-shine-360 {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
-.animate-blob {
-  animation: blob 7s infinite;
+@keyframes slideInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-.animation-delay-2000 {
-  animation-delay: 2s;
+@keyframes slideInDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-.animation-delay-4000 {
-  animation-delay: 4s;
+@keyframes progress {
+  from { width: 0%; }
+  to { width: var(--progress-width); }
 }
 
-/* Enhanced Scrollbar */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
-  @apply w-2;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-muted/50 rounded-full;
+  @apply bg-background;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-primary/50 rounded-full hover:bg-primary/70 transition-colors duration-300;
+  @apply bg-primary/50 rounded-full hover:bg-primary/70 transition-colors;
 }
 
-/* New Utility Classes */
 .text-balance {
   text-wrap: balance;
-}
-
-/* New Animations */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(124, 58, 237, 0.4);
-  }
-}
-
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }

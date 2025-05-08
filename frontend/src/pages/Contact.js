@@ -1,97 +1,240 @@
 import React, { useState } from 'react';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    subject: '',
     message: '',
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: Implement form submission
-    console.log('Form submitted:', formData);
-  };
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const contactInfo = [
+    {
+      icon: <FaEnvelope className="w-6 h-6" />,
+      title: 'Email',
+      content: 'your.email@example.com',
+      link: 'mailto:your.email@example.com',
+    },
+    {
+      icon: <FaPhone className="w-6 h-6" />,
+      title: 'Phone',
+      content: '+1 (555) 123-4567',
+      link: 'tel:+15551234567',
+    },
+    {
+      icon: <FaMapMarkerAlt className="w-6 h-6" />,
+      title: 'Location',
+      content: 'San Francisco, CA',
+      link: 'https://maps.google.com/?q=San+Francisco,+CA',
+    },
+  ];
+
+  const socialLinks = [
+    {
+      icon: <FaGithub className="w-6 h-6" />,
+      name: 'GitHub',
+      url: 'https://github.com/yourusername',
+    },
+    {
+      icon: <FaLinkedin className="w-6 h-6" />,
+      name: 'LinkedIn',
+      url: 'https://linkedin.com/in/yourusername',
+    },
+    {
+      icon: <FaTwitter className="w-6 h-6" />,
+      name: 'Twitter',
+      url: 'https://twitter.com/yourusername',
+    },
+  ];
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col items-center">
-      <div className="relative mb-12 w-full flex flex-col items-center">
-        <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl shadow-2xl border border-indigo-400/30 p-10 w-full md:w-2/3 flex flex-col items-center">
-          <h2 className="text-3xl font-extrabold text-white sm:text-4xl drop-shadow-lg mb-2">Get in Touch</h2>
-          <p className="mt-2 text-lg text-indigo-100 text-center max-w-2xl">Feel free to reach out to me for any inquiries or collaborations.</p>
+    <div className="min-h-screen py-20 relative">
+      {/* Background gradient circles */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/10 rounded-full filter blur-3xl translate-x-1/2 translate-y-1/2" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="text-center mb-16 animate-slideInDown">
+          <h1 className="text-4xl font-extrabold text-white mb-4">
+            Get in <span className="gradient-text">Touch</span>
+          </h1>
+          <p className="text-gray-300 max-w-2xl mx-auto">
+            Have a question or want to work together? Feel free to reach out through the form below or connect with me on social media.
+          </p>
         </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full mt-8">
-        <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl shadow-2xl border border-indigo-400/30 p-10 hover:scale-105 transition-transform duration-300">
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <div className="glass-card p-8 animate-fadeIn">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-indigo-100">Name</label>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                  Name
+                </label>
               <input
                 type="text"
+                  id="name"
                 name="name"
-                id="name"
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="mt-1 block w-full rounded-md bg-indigo-400/20 border border-indigo-400/30 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  className="w-full px-4 py-3 bg-background/50 border border-glass-border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
+                  placeholder="Your name"
               />
             </div>
+
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-indigo-100">Email</label>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  Email
+                </label>
               <input
                 type="email"
+                  id="email"
                 name="email"
-                id="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="mt-1 block w-full rounded-md bg-indigo-400/20 border border-indigo-400/30 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  className="w-full px-4 py-3 bg-background/50 border border-glass-border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
+                  placeholder="your.email@example.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-background/50 border border-glass-border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
+                  placeholder="What's this about?"
               />
             </div>
+
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-indigo-100">Message</label>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                  Message
+                </label>
               <textarea
+                  id="message"
                 name="message"
-                id="message"
-                rows={4}
                 value={formData.message}
                 onChange={handleChange}
                 required
-                className="mt-1 block w-full rounded-md bg-indigo-400/20 border border-indigo-400/30 text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  rows={4}
+                  className="w-full px-4 py-3 bg-background/50 border border-glass-border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all resize-none"
+                  placeholder="Your message..."
               />
             </div>
-            <div>
+
               <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                disabled={isSubmitting}
+                className="w-full btn py-3 px-6 text-center transition-all duration-300"
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
-            </div>
+
+              {submitStatus === 'success' && (
+                <p className="text-green-400 text-center mt-4 animate-fadeIn">
+                  Message sent successfully! I'll get back to you soon.
+                </p>
+              )}
+
+              {submitStatus === 'error' && (
+                <p className="text-red-400 text-center mt-4 animate-fadeIn">
+                  Oops! Something went wrong. Please try again later.
+                </p>
+              )}
           </form>
         </div>
-        <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl shadow-2xl border border-indigo-400/30 p-10 flex flex-col justify-center hover:scale-105 transition-transform duration-300">
-          <h3 className="text-2xl font-bold text-white mb-6 drop-shadow">Other Ways to Connect</h3>
-          <div className="mt-4 space-y-4">
-            <div className="flex items-center">
-              <span className="text-indigo-100">Email:</span>
-              <a href="mailto:your.email@example.com" className="ml-2 text-indigo-300 hover:text-yellow-300 font-semibold transition-colors duration-200">your.email@example.com</a>
+
+          {/* Contact Information */}
+          <div className="space-y-8 animate-fadeIn delay-200">
+            {/* Contact Cards */}
+            <div className="space-y-4">
+              {contactInfo.map((info, index) => (
+                <a
+                  key={info.title}
+                  href={info.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="glass-card p-6 flex items-center gap-4 hover-scale transition-all duration-300"
+                >
+                  <div className="text-primary">{info.icon}</div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-white">{info.title}</h3>
+                    <p className="text-gray-300">{info.content}</p>
+                  </div>
+                </a>
+              ))}
             </div>
-            <div className="flex items-center">
-              <span className="text-indigo-100">LinkedIn:</span>
-              <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="ml-2 text-indigo-300 hover:text-yellow-300 font-semibold transition-colors duration-200">linkedin.com/in/yourprofile</a>
+
+            {/* Social Links */}
+            <div className="glass-card p-6">
+              <h3 className="text-xl font-semibold text-white mb-4">Connect with me</h3>
+              <div className="flex gap-4">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-background/50 rounded-full text-gray-300 hover:text-primary hover:bg-background/70 transition-all duration-300"
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
             </div>
-            <div className="flex items-center">
-              <span className="text-indigo-100">GitHub:</span>
-              <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="ml-2 text-indigo-300 hover:text-yellow-300 font-semibold transition-colors duration-200">github.com/yourusername</a>
+
+            {/* Map or Additional Info */}
+            <div className="glass-card p-6">
+              <h3 className="text-xl font-semibold text-white mb-4">Location</h3>
+              <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100939.98555098464!2d-122.5076401794305!3d37.75781499657603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1647043087964!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="rounded-lg"
+                />
+              </div>
             </div>
           </div>
         </div>
