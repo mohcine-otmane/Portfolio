@@ -1,10 +1,15 @@
 import React from 'react';
 import { FaCode, FaServer, FaGraduationCap, FaRocket } from 'react-icons/fa';
+import profile from './assets/images/profile.png';
 
 const About = () => {
   return (
     <div className="min-h-screen py-20 relative">
       <div className="container mx-auto px-4">
+        <div className="flex flex-col items-center mb-8">
+          <img src={profile} alt="Profile" className="w-40 h-40 rounded-full shadow-xl border-4 border-white object-cover bg-white/80" />
+          <h1 className="mt-4 text-3xl font-bold text-white tracking-wide">MOHCINE OTMANE</h1>
+        </div>
         <h2 className="text-4xl font-bold text-center mb-16 animate-slideInDown">
           <span className="gradient-text">About Me</span>
         </h2>

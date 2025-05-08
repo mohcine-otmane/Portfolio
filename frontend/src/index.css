@@ -64,7 +64,7 @@
 }
 
 @layer components {
-  /* Enhanced Glass Effects */
+  /* Glass Effects */
   .glass-card {
     @apply bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-lg border border-glass-border shadow-lg text-white rounded-xl relative overflow-hidden transition-all duration-300;
     transform: translateZ(0);
@@ -136,7 +136,6 @@
     filter: blur(0.5px);
   }
 
-  /* Enhanced Gradients */
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary font-semibold;
     will-change: background-position;
@@ -185,7 +184,6 @@
     @apply transition-all duration-300 hover:from-primary/40 hover:via-secondary/40 hover:to-accent/40;
   }
 
-  /* Navigation */
   .nav-link {
     @apply text-white hover:text-accent transition-colors font-medium px-4 py-2 rounded-lg hover:bg-accent/10;
   }
@@ -194,7 +192,7 @@
     @apply text-accent font-semibold bg-accent/10;
   }
 
-  /* Enhanced Buttons */
+
   .btn {
     @apply px-6 py-3 rounded-xl transition-all duration-300 font-medium text-white shadow-lg bg-gradient-to-r from-primary/90 to-secondary/90 relative overflow-hidden;
     transform: translateZ(0);
@@ -259,12 +257,11 @@
     @apply transition-transform duration-300 hover:scale-[1.02];
   }
 
-  /* Cards */
+
   .card {
     @apply glass-card p-8 shadow-xl hover:shadow-2xl transition-all duration-300;
   }
 
-  /* Layout */
   .section {
     @apply py-24 text-white relative overflow-hidden;
   }
@@ -305,12 +302,12 @@
     @apply text-xl text-white/90 mb-12 font-medium;
   }
 
-  /* Text Effects */
+ 
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent font-bold;
   }
 
-  /* Hover Effects */
+
   .hover-lift {
     @apply transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg;
   }
@@ -347,7 +344,7 @@
     @apply transition-all duration-300 hover:shadow-xl hover:shadow-accent/30;
   }
 
-  /* Background Elements */
+
   .bg-blob {
     @apply absolute rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob;
   }
@@ -364,7 +361,6 @@
     @apply bg-blob bg-accent;
   }
 
-  /* New Modern Card Styles */
   .modern-card {
     @apply bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md border-2 border-border/40 rounded-xl p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 hover:scale-[1.02] relative overflow-hidden;
   }
@@ -386,7 +382,7 @@
     @apply opacity-100;
   }
 
-  /* New Animation Classes */
+ 
   .float {
     animation: float 6s ease-in-out infinite;
   }
@@ -400,7 +396,6 @@
   }
 }
 
-/* Remove unused animations */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -431,7 +426,7 @@
   to { width: var(--progress-width); }
 }
 
-/* Custom scrollbar */
+
 ::-webkit-scrollbar {
   width: 8px;
 }

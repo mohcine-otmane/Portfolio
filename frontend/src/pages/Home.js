@@ -176,7 +176,7 @@ const Home = () => {
                 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 gradient-text leading-tight"
                 variants={itemVariants}
               >
-                Hi, I'm <span className="text-primary">Your Name</span>
+                Hi, I'm <span className="text-primary">MOHCINE OTMANE</span>
               </motion.h1>
               <motion.div 
                 className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full"

@@ -6,12 +6,10 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import Skills from './components/Skills';
-import CursorBackground from './components/CursorBackground';
 
 function App() {
   return (
     <div className="min-h-screen bg-background">
-      <CursorBackground />
       <Navbar />
       <main className="lg:ml-64 transition-all duration-300">
         <Routes>
