@@ -26,6 +26,9 @@ module.exports = {
         'blob': 'blob 7s infinite',
         'fade-in': 'fadeIn 0.5s ease-out forwards',
         'slide-in': 'slideIn 0.5s ease-out forwards',
+        'spin-slow': 'spin 3s linear infinite',
+        'wiggle': 'wiggle 1s ease-in-out infinite',
+        'fadeIn': 'fadeIn 0.3s ease-in-out',
       },
       keyframes: {
         blob: {
@@ -41,6 +44,10 @@ module.exports = {
         slideIn: {
           '0%': { transform: 'scaleX(0)' },
           '100%': { transform: 'scaleX(1)' },
+        },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
         },
       },
     },

@@ -18,6 +18,7 @@ import { FaReact } from 'react-icons/fa';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeItem, setActiveItem] = useState('/');
+  const [hoveredItem, setHoveredItem] = useState(null);
 
   const navItems = [
     {
@@ -28,7 +29,8 @@ const Navbar = () => {
       hoverColor: 'group-hover:text-[#FF8787]',
       bgColor: 'bg-[#FF6B6B]/10',
       hoverBgColor: 'group-hover:bg-[#FF6B6B]/20',
-      glowColor: 'group-hover:shadow-[#FF6B6B]/20'
+      glowColor: 'group-hover:shadow-[#FF6B6B]/20',
+      animation: 'group-hover:animate-bounce'
     },
     {
       path: '/about',
@@ -38,7 +40,8 @@ const Navbar = () => {
       hoverColor: 'group-hover:text-[#6ED7D0]',
       bgColor: 'bg-[#4ECDC4]/10',
       hoverBgColor: 'group-hover:bg-[#4ECDC4]/20',
-      glowColor: 'group-hover:shadow-[#4ECDC4]/20'
+      glowColor: 'group-hover:shadow-[#4ECDC4]/20',
+      animation: 'group-hover:animate-pulse'
     },
     {
       path: '/projects',
@@ -48,7 +51,8 @@ const Navbar = () => {
       hoverColor: 'group-hover:text-[#FFE566]',
       bgColor: 'bg-[#FFD93D]/10',
       hoverBgColor: 'group-hover:bg-[#FFD93D]/20',
-      glowColor: 'group-hover:shadow-[#FFD93D]/20'
+      glowColor: 'group-hover:shadow-[#FFD93D]/20',
+      animation: 'group-hover:animate-spin-slow'
     },
     {
       path: '/contact',
@@ -58,7 +62,8 @@ const Navbar = () => {
       hoverColor: 'group-hover:text-[#A7E7DB]',
       bgColor: 'bg-[#95E1D3]/10',
       hoverBgColor: 'group-hover:bg-[#95E1D3]/20',
-      glowColor: 'group-hover:shadow-[#95E1D3]/20'
+      glowColor: 'group-hover:shadow-[#95E1D3]/20',
+      animation: 'group-hover:animate-wiggle'
     }
   ];
 
@@ -70,7 +75,8 @@ const Navbar = () => {
       hoverColor: 'group-hover:text-[#2D2D2D]',
       bgColor: 'bg-[#181717]/10',
       hoverBgColor: 'group-hover:bg-[#181717]/20',
-      glowColor: 'group-hover:shadow-[#181717]/20'
+      glowColor: 'group-hover:shadow-[#181717]/20',
+      animation: 'group-hover:animate-bounce'
     },
     {
       icon: <RiLinkedinFill className="w-5 h-5" />,
@@ -79,7 +85,8 @@ const Navbar = () => {
       hoverColor: 'group-hover:text-[#0B7DE3]',
       bgColor: 'bg-[#0A66C2]/10',
       hoverBgColor: 'group-hover:bg-[#0A66C2]/20',
-      glowColor: 'group-hover:shadow-[#0A66C2]/20'
+      glowColor: 'group-hover:shadow-[#0A66C2]/20',
+      animation: 'group-hover:animate-pulse'
     },
     {
       icon: <RiTwitterFill className="w-5 h-5" />,
@@ -88,7 +95,8 @@ const Navbar = () => {
       hoverColor: 'group-hover:text-[#4AB4F4]',
       bgColor: 'bg-[#1DA1F2]/10',
       hoverBgColor: 'group-hover:bg-[#1DA1F2]/20',
-      glowColor: 'group-hover:shadow-[#1DA1F2]/20'
+      glowColor: 'group-hover:shadow-[#1DA1F2]/20',
+      animation: 'group-hover:animate-wiggle'
     }
   ];
 
@@ -148,13 +156,16 @@ const Navbar = () => {
                   setIsOpen(false);
                   setActiveItem(item.path);
                 }}
+                onMouseEnter={() => setHoveredItem(item.path)}
+                onMouseLeave={() => setHoveredItem(null)}
               >
-                <div className={`p-3 rounded-xl ${item.bgColor} ${item.hoverBgColor} transition-all duration-300 ${item.glowColor} group-hover:shadow-lg`}>
-                  <div className={`${item.color} ${item.hoverColor} transform group-hover:scale-110 transition-all duration-300`}>
+                <div className={`p-3 rounded-xl ${item.bgColor} ${item.hoverBgColor} transition-all duration-300 ${item.glowColor} group-hover:shadow-lg relative overflow-hidden`}>
+                  <div className={`${item.color} ${item.hoverColor} transform group-hover:scale-110 transition-all duration-300 ${item.animation}`}>
                     {item.icon}
                   </div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:translate-x-full"></div>
                 </div>
-                <span className="absolute left-full ml-2 px-2 py-1 bg-white/10 backdrop-blur-sm rounded-lg text-sm font-medium text-white opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap transform group-hover:translate-x-1">
+                <span className={`absolute left-full ml-2 px-2 py-1 bg-white/10 backdrop-blur-sm rounded-lg text-sm font-medium text-white opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap transform group-hover:translate-x-1 ${hoveredItem === item.path ? 'animate-fadeIn' : ''}`}>
                   {item.label}
                 </span>
               </Link>
@@ -170,13 +181,15 @@ const Navbar = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative flex items-center justify-center"
+                onMouseEnter={() => setHoveredItem(`social-${index}`)}
+                onMouseLeave={() => setHoveredItem(null)}
               >
-                <div className={`p-2 rounded-xl ${item.bgColor} ${item.hoverBgColor} transition-all duration-300 ${item.glowColor} group-hover:shadow-lg`}>
-                  <div className={`${item.color} ${item.hoverColor} transform group-hover:scale-110 transition-all duration-300`}>
+                <div className={`p-2 rounded-xl ${item.bgColor} ${item.hoverBgColor} transition-all duration-300 ${item.glowColor} group-hover:shadow-lg relative overflow-hidden`}>
+                  <div className={`${item.color} ${item.hoverColor} transform group-hover:scale-110 transition-all duration-300 ${item.animation}`}>
                     {item.icon}
                   </div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:translate-x-full"></div>
                 </div>
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </a>
             ))}
           </div>
