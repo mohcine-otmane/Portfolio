@@ -14,6 +14,7 @@ import {
   RiTwitterFill
 } from 'react-icons/ri';
 import { FaReact } from 'react-icons/fa';
+import logo from '../logo.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -219,7 +220,7 @@ const Navbar = () => {
             >
               <div className="relative">
                 <div className="absolute inset-0 bg-[#61DAFB]/20 rounded-full blur-lg group-hover:blur-xl transition-all duration-300"></div>
-                <FaReact className="w-8 h-8 text-[#61DAFB] transform group-hover:rotate-180 transition-all duration-500" />
+                <img src={logo} alt="Logo" className="w-12 h-12 object-contain bg-white rounded-full shadow-lg p-1 border-2 border-gray-200 transition-transform duration-700 group-hover:scale-110 group-hover:shadow-[0_0_24px_4px_rgba(33,150,243,0.4)] group-hover:rotate-360" />
               </div>
             </Link>
           </div>

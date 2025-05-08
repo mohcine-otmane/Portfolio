@@ -1,9 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaTwitter, FaReact, FaNodeJs, FaPython, FaAws, FaDocker, FaJava, FaGitAlt, FaDatabase, FaPhp } from 'react-icons/fa';
+import { SiTypescript, SiMongodb, SiGraphql, SiCplusplus, SiCmake, SiSpringboot, SiHibernate, SiMysql } from 'react-icons/si';
 import { HiArrowRight, HiArrowNarrowRight } from 'react-icons/hi';
 import { BsCodeSlash, BsLaptop, BsServer } from 'react-icons/bs';
+
+// Custom SFML Icon Component
+const SFMLIcon = () => (
+  <svg 
+    className="w-8 h-8" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path 
+      d="M4 4H20V20H4V4Z" 
+      fill="#FF6B6B"
+    />
+    <path 
+      d="M7 7H17V17H7V7Z" 
+      fill="white"
+    />
+    <path 
+      d="M9 9H15V15H9V9Z" 
+      fill="#FF6B6B"
+    />
+    <path 
+      d="M11 11H13V13H11V11Z" 
+      fill="white"
+    />
+  </svg>
+);
 
 const Home = () => {
   const featuredProjects = [
@@ -48,6 +76,26 @@ const Home = () => {
     { name: "GitHub", icon: <FaGithub />, link: "https://github.com/yourusername" },
     { name: "LinkedIn", icon: <FaLinkedin />, link: "https://linkedin.com/in/yourusername" },
     { name: "Twitter", icon: <FaTwitter />, link: "https://twitter.com/yourusername" }
+  ];
+
+  const techStack = [
+    { name: "React", icon: <FaReact className="w-8 h-8 text-[#61DAFB]" /> },
+    { name: "Node.js", icon: <FaNodeJs className="w-8 h-8 text-[#339933]" /> },
+    { name: "TypeScript", icon: <SiTypescript className="w-8 h-8 text-[#3178C6]" /> },
+    { name: "Python", icon: <FaPython className="w-8 h-8 text-[#3776AB]" /> },
+    { name: "PHP", icon: <FaPhp className="w-8 h-8 text-[#777BB4]" /> },
+    { name: "MongoDB", icon: <SiMongodb className="w-8 h-8 text-[#47A248]" /> },
+    { name: "MySQL", icon: <SiMysql className="w-8 h-8 text-[#4479A1]" /> },
+    { name: "Hibernate", icon: <SiHibernate className="w-8 h-8 text-[#BCAE79]" /> },
+    { name: "AWS", icon: <FaAws className="w-8 h-8 text-[#FF9900]" /> },
+    { name: "Docker", icon: <FaDocker className="w-8 h-8 text-[#2496ED]" /> },
+    { name: "GraphQL", icon: <SiGraphql className="w-8 h-8 text-[#E10098]" /> },
+    { name: "C++", icon: <SiCplusplus className="w-8 h-8 text-[#00599C]" /> },
+    { name: "SFML", icon: <SFMLIcon /> },
+    { name: "CMake", icon: <SiCmake className="w-8 h-8 text-[#064F8C]" /> },
+    { name: "Java", icon: <FaJava className="w-8 h-8 text-[#007396]" /> },
+    { name: "Spring Boot", icon: <SiSpringboot className="w-8 h-8 text-[#6DB33F]" /> },
+    { name: "Git", icon: <FaGitAlt className="w-8 h-8 text-[#F05032]" /> }
   ];
 
   const containerVariants = {
@@ -250,7 +298,7 @@ const Home = () => {
                   <span className="text-primary font-semibold">{item.year}</span>
                   <h3 className="text-xl font-semibold text-text">{item.title}</h3>
                   <p className="text-text-secondary">{item.company}</p>
-                </div>
+            </div>
                 <p className="text-text-secondary">{item.description}</p>
               </motion.div>
             ))}
@@ -264,23 +312,25 @@ const Home = () => {
         >
           <h2 className="text-3xl font-bold mb-8 text-center gradient-text">Tech Stack</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-            {['React', 'Node.js', 'TypeScript', 'Python', 'MongoDB', 'AWS', 'Docker', 'GraphQL'].map((skill, index) => (
+            {techStack.map((tech, index) => (
               <motion.div 
                 key={index} 
-                className="flex flex-col items-center p-4 rounded-lg bg-primary/5 hover:bg-primary/10 transition-colors duration-300"
+                className="flex flex-col items-center p-4 rounded-lg bg-primary/5 hover:bg-primary/10 transition-colors duration-300 group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <BsCodeSlash className="w-6 h-6 text-primary mb-2" />
-                <span className="text-lg font-medium text-text">{skill}</span>
+                <div className="mb-2 transform group-hover:scale-110 transition-transform duration-300">
+                  {tech.icon}
+                </div>
+                <span className="text-lg font-medium text-text">{tech.name}</span>
               </motion.div>
             ))}
-          </div>
+        </div>
           <div className="text-center mt-8">
             <Link to="/skills" className="text-primary hover:text-secondary transition-colors duration-300 flex items-center justify-center gap-2">
               View all skills <HiArrowRight className="w-4 h-4" />
             </Link>
-          </div>
+      </div>
         </motion.div>
       </motion.div>
     </section>

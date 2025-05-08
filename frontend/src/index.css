@@ -21,6 +21,15 @@
   .animation-delay-800 {
     animation-delay: 800ms;
   }
+  .rotate-360 {
+    transform: rotate(360deg);
+  }
+  .transition-transform {
+    transition-property: transform;
+  }
+  .duration-700 {
+    transition-duration: 700ms;
+  }
 }
 
 :root {
@@ -437,4 +446,8 @@
 
 .text-balance {
   text-wrap: balance;
+}
+
+.group:hover .group-hover\:rotate-360 {
+  transform: rotate(360deg);
 }
