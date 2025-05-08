@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+  .animation-delay-800 {
+    animation-delay: 800ms;
+  }
+}
+
 :root {
   /* Modern Dark Theme with Enhanced Visibility */
   --background: 15 15 20;
@@ -36,7 +57,9 @@
 @layer components {
   /* Enhanced Glass Effects */
   .glass-card {
-    @apply bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-lg border border-glass-border shadow-lg text-white rounded-xl relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/10;
+    @apply bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-lg border border-glass-border shadow-lg text-white rounded-xl relative overflow-hidden transition-all duration-300;
+    transform: translateZ(0);
+    will-change: transform;
   }
 
   .glass-card::before {
@@ -46,9 +69,9 @@
       90deg,
       transparent 0%,
       transparent 45%,
-      rgba(255, 255, 255, 0.2) 48%,
-      rgba(255, 255, 255, 0.4) 50%,
-      rgba(255, 255, 255, 0.2) 52%,
+      rgba(255, 255, 255, 0.1) 48%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.1) 52%,
       transparent 55%,
       transparent 100%
     );
@@ -56,7 +79,8 @@
     mask-composite: exclude;
     padding: 1px;
     filter: blur(0.5px);
-    animation: edge-shine-360 4s linear infinite;
+    animation: edge-shine-360 8s linear infinite;
+    will-change: transform;
   }
 
   .glass-bg {
@@ -109,7 +133,8 @@
 
   /* Enhanced Gradients */
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent font-semibold hover:from-accent hover:via-primary hover:to-secondary transition-all duration-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary font-semibold;
+    will-change: background-position;
   }
 
   .gradient-border {
@@ -167,7 +192,9 @@
 
   /* Enhanced Buttons */
   .btn {
-    @apply px-6 py-3 rounded-xl transition-all duration-300 font-medium text-white shadow-lg bg-gradient-to-r from-primary/90 to-secondary/90 hover:from-primary hover:to-secondary relative overflow-hidden hover:scale-105 hover:shadow-xl hover:shadow-primary/20;
+    @apply px-6 py-3 rounded-xl transition-all duration-300 font-medium text-white shadow-lg bg-gradient-to-r from-primary/90 to-secondary/90 relative overflow-hidden;
+    transform: translateZ(0);
+    will-change: transform;
   }
 
   .btn::before {
@@ -177,9 +204,9 @@
       90deg,
       transparent 0%,
       transparent 45%,
-      rgba(255, 255, 255, 0.2) 48%,
-      rgba(255, 255, 255, 0.4) 50%,
-      rgba(255, 255, 255, 0.2) 52%,
+      rgba(255, 255, 255, 0.1) 48%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.1) 52%,
       transparent 55%,
       transparent 100%
     );
@@ -187,7 +214,8 @@
     mask-composite: exclude;
     padding: 1px;
     filter: blur(0.5px);
-    animation: edge-shine-360 4s linear infinite;
+    animation: edge-shine-360 8s linear infinite;
+    will-change: transform;
   }
 
   .btn-primary {
@@ -299,7 +327,9 @@
   }
 
   .hover-scale {
-    @apply transition-all duration-300 hover:scale-105 hover:shadow-xl;
+    @apply transition-transform duration-300;
+    transform: translateZ(0);
+    will-change: transform;
   }
 
   .hover-rotate {
@@ -411,20 +441,9 @@
 @keyframes edge-shine-360 {
   0% {
     transform: rotate(0deg);
-    filter: blur(0.5px) brightness(1);
-  }
-  25% {
-    filter: blur(0.5px) brightness(1.2);
-  }
-  50% {
-    filter: blur(0.5px) brightness(1);
-  }
-  75% {
-    filter: blur(0.5px) brightness(1.2);
   }
   100% {
     transform: rotate(360deg);
-    filter: blur(0.5px) brightness(1);
   }
 }
 

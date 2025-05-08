@@ -23,31 +23,37 @@ module.exports = {
         input: '#8892b0',
       },
       animation: {
-        'blob': 'blob 7s infinite',
-        'fade-in': 'fadeIn 0.5s ease-out forwards',
-        'slide-in': 'slideIn 0.5s ease-out forwards',
-        'spin-slow': 'spin 3s linear infinite',
-        'wiggle': 'wiggle 1s ease-in-out infinite',
         'fadeIn': 'fadeIn 0.3s ease-in-out',
+        'slideInLeft': 'slideInLeft 0.5s ease-out forwards',
+        'slideInRight': 'slideInRight 0.5s ease-out forwards',
+        'slideInUp': 'slideInUp 0.5s ease-out forwards',
+        'slideInDown': 'slideInDown 0.5s ease-out forwards',
+        'progress': 'progress 1s ease-out forwards',
       },
       keyframes: {
-        blob: {
-          '0%': { transform: 'translate(0px, 0px) scale(1)' },
-          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-          '100%': { transform: 'translate(0px, 0px) scale(1)' },
-        },
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
-        slideIn: {
-          '0%': { transform: 'scaleX(0)' },
-          '100%': { transform: 'scaleX(1)' },
+        slideInLeft: {
+          '0%': { transform: 'translateX(-100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
         },
-        wiggle: {
-          '0%, 100%': { transform: 'rotate(-3deg)' },
-          '50%': { transform: 'rotate(3deg)' },
+        slideInRight: {
+          '0%': { transform: 'translateX(100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+        slideInUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideInDown: {
+          '0%': { transform: 'translateY(-20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        progress: {
+          '0%': { width: '0%' },
+          '100%': { width: 'var(--progress-width)' },
         },
       },
     },

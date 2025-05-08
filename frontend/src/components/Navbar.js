@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   MdMenu,
@@ -19,6 +19,84 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeItem, setActiveItem] = useState('/');
   const [hoveredItem, setHoveredItem] = useState(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [lightIntensity, setLightIntensity] = useState(1);
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+      
+      // Calculate light intensity based on cursor distance from navbar
+      if (navRef.current) {
+        const rect = navRef.current.getBoundingClientRect();
+        const distance = Math.sqrt(
+          Math.pow(e.clientX - rect.left, 2) + 
+          Math.pow(e.clientY - rect.top, 2)
+        );
+        const maxDistance = Math.max(window.innerWidth, window.innerHeight);
+        const intensity = Math.max(0, 1 - (distance / maxDistance));
+        setLightIntensity(intensity);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  const calculateLightEffect = (element) => {
+    if (!element) return { x: 0, y: 0, intensity: 0 };
+    
+    const rect = element.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    // Calculate direction from element to cursor
+    const deltaX = (mousePosition.x - centerX) / 20;
+    const deltaY = (mousePosition.y - centerY) / 20;
+    
+    // Calculate distance from cursor to element
+    const distance = Math.sqrt(
+      Math.pow(mousePosition.x - centerX, 2) + 
+      Math.pow(mousePosition.y - centerY, 2)
+    );
+    
+    // Calculate light intensity based on distance
+    const elementIntensity = Math.max(0, 1 - (distance / 500)) * lightIntensity;
+    
+    // Calculate shadow position (opposite to light source)
+    const shadowX = -deltaX * 2; // Increased shadow offset
+    const shadowY = -deltaY * 2;
+    
+    return { 
+      x: deltaX, 
+      y: deltaY, 
+      shadowX,
+      shadowY,
+      intensity: elementIntensity,
+      distance
+    };
+  };
+
+  const getLightStyle = (element) => {
+    const { x, y, shadowX, shadowY, intensity, distance } = calculateLightEffect(element);
+    
+    return {
+      transform: `perspective(1000px) rotateX(${y}deg) rotateY(${x}deg)`,
+      boxShadow: `
+        ${shadowX}px ${shadowY}px 30px rgba(0,0,0,0.4),
+        ${shadowX/2}px ${shadowY/2}px 15px rgba(0,0,0,0.3),
+        ${x}px ${y}px 10px rgba(255,255,255,${intensity * 0.15}),
+        0 0 ${20 * intensity}px rgba(255,255,255,${intensity * 0.05})
+      `,
+      background: `linear-gradient(
+        ${Math.atan2(y, x) * (180/Math.PI)}deg,
+        rgba(255,255,255,${intensity * 0.15}) 0%,
+        rgba(0,0,0,${0.1 + (1-intensity) * 0.2}) 100%
+      )`,
+      filter: `brightness(${1 + intensity * 0.3}) contrast(${1 + intensity * 0.1})`
+    };
+  };
 
   const navItems = [
     {
@@ -124,6 +202,7 @@ const Navbar = () => {
 
       {/* Sidebar */}
       <nav
+        ref={navRef}
         className={`fixed top-0 left-0 h-full w-20 lg:w-24 bg-white/5 backdrop-blur-lg border-r border-white/10 transform transition-all duration-500 ease-in-out lg:translate-x-0 z-[95] ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
@@ -159,7 +238,10 @@ const Navbar = () => {
                 onMouseEnter={() => setHoveredItem(item.path)}
                 onMouseLeave={() => setHoveredItem(null)}
               >
-                <div className={`p-3 rounded-xl ${item.bgColor} ${item.hoverBgColor} transition-all duration-300 ${item.glowColor} group-hover:shadow-lg relative overflow-hidden`}>
+                <div 
+                  className={`p-3 rounded-xl ${item.bgColor} ${item.hoverBgColor} transition-all duration-300 ${item.glowColor} group-hover:shadow-lg relative overflow-hidden`}
+                  style={getLightStyle(this)}
+                >
                   <div className={`${item.color} ${item.hoverColor} transform group-hover:scale-110 transition-all duration-300 ${item.animation}`}>
                     {item.icon}
                   </div>
@@ -184,7 +266,10 @@ const Navbar = () => {
                 onMouseEnter={() => setHoveredItem(`social-${index}`)}
                 onMouseLeave={() => setHoveredItem(null)}
               >
-                <div className={`p-2 rounded-xl ${item.bgColor} ${item.hoverBgColor} transition-all duration-300 ${item.glowColor} group-hover:shadow-lg relative overflow-hidden`}>
+                <div 
+                  className={`p-2 rounded-xl ${item.bgColor} ${item.hoverBgColor} transition-all duration-300 ${item.glowColor} group-hover:shadow-lg relative overflow-hidden`}
+                  style={getLightStyle(this)}
+                >
                   <div className={`${item.color} ${item.hoverColor} transform group-hover:scale-110 transition-all duration-300 ${item.animation}`}>
                     {item.icon}
                   </div>
