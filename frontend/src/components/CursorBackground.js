@@ -12,8 +12,10 @@ const CursorBackground = () => {
   const lastUpdateRef = useRef(0);
   const mousePositionRef = useRef({ x: 0, y: 0 });
 
-  // State for hover effect
+  // State for hover effect and interaction
   const [isHovering, setIsHovering] = useState(false);
+  const [isClicking, setIsClicking] = useState(false);
+  const [particles, setParticles] = useState([]);
 
   // Constants for performance tuning
   const THROTTLE_MS = 16; // ~60fps
@@ -21,6 +23,8 @@ const CursorBackground = () => {
   const SCALE_FACTOR = 1.1;
   const RIPPLE_SCALE = 1.2;
   const RIPPLE_DURATION = 200; // ms
+  const PARTICLE_COUNT = 20;
+  const PARTICLE_LIFETIME = 1000; // ms
 
   /**
    * Light element configuration
@@ -49,6 +53,28 @@ const CursorBackground = () => {
       hoverColor: 'from-accent/20 via-primary/20 to-secondary/20',
     },
   ];
+
+  /**
+   * Creates particles at the click position
+   */
+  const createParticles = useCallback((x, y) => {
+    const newParticles = Array.from({ length: PARTICLE_COUNT }, (_, i) => ({
+      id: Date.now() + i,
+      x,
+      y,
+      angle: (Math.PI * 2 * i) / PARTICLE_COUNT,
+      speed: 2 + Math.random() * 2,
+      size: 4 + Math.random() * 4,
+      color: `hsl(${Math.random() * 360}, 70%, 60%)`,
+    }));
+
+    setParticles(prev => [...prev, ...newParticles]);
+
+    // Remove particles after their lifetime
+    setTimeout(() => {
+      setParticles(prev => prev.filter(p => !newParticles.find(np => np.id === p.id)));
+    }, PARTICLE_LIFETIME);
+  }, []);
 
   /**
    * Updates the position of light elements based on mouse movement
@@ -96,6 +122,9 @@ const CursorBackground = () => {
     const clickX = clientX - left;
     const clickY = clientY - top;
 
+    setIsClicking(true);
+    createParticles(clickX, clickY);
+
     lightsRef.current.forEach((light, index) => {
       if (!light) return;
       
@@ -105,10 +134,11 @@ const CursorBackground = () => {
           light.style.transform = `translate(${mousePositionRef.current.x}px, ${
             mousePositionRef.current.y
           }px) scale(1)`;
+          setIsClicking(false);
         }, RIPPLE_DURATION);
       }, index * 50);
     });
-  }, []);
+  }, [createParticles]);
 
   /**
    * Handles mouse enter event
@@ -133,6 +163,24 @@ const CursorBackground = () => {
       light.style.filter = 'brightness(1)';
     });
   }, []);
+
+  // Update particle positions
+  useEffect(() => {
+    if (particles.length === 0) return;
+
+    const interval = setInterval(() => {
+      setParticles(prev => 
+        prev.map(particle => ({
+          ...particle,
+          x: particle.x + Math.cos(particle.angle) * particle.speed,
+          y: particle.y + Math.sin(particle.angle) * particle.speed,
+          size: particle.size * 0.95,
+        }))
+      );
+    }, 16);
+
+    return () => clearInterval(interval);
+  }, [particles]);
 
   // Set up event listeners
   useEffect(() => {
@@ -176,6 +224,22 @@ const CursorBackground = () => {
             opacity: light.opacity / 100,
             willChange: 'transform',
             transformOrigin: 'center center',
+          }}
+        />
+      ))}
+      {particles.map(particle => (
+        <div
+          key={particle.id}
+          className="absolute rounded-full"
+          style={{
+            left: particle.x,
+            top: particle.y,
+            width: particle.size,
+            height: particle.size,
+            backgroundColor: particle.color,
+            transform: 'translate(-50%, -50%)',
+            opacity: particle.size / 8,
+            transition: 'all 0.1s ease-out',
           }}
         />
       ))}

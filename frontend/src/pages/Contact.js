@@ -52,8 +52,8 @@ const Contact = () => {
     {
       icon: <FaMapMarkerAlt className="w-6 h-6" />,
       title: 'Location',
-      content: 'San Francisco, CA',
-      link: 'https://maps.google.com/?q=San+Francisco,+CA',
+      content: 'Casablanca, Morocco',
+      link: 'https://maps.google.com/?q=Casablanca,+Morocco',
     },
   ];
 
@@ -225,7 +225,7 @@ const Contact = () => {
               <h3 className="text-xl font-semibold text-white mb-4">Location</h3>
               <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100939.98555098464!2d-122.5076401794305!3d37.75781499657603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1647043087964!5m2!1sen!2sus"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d212270.3177328395!2d-7.6824492!3d33.5731104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda76b871f50c5c1%3A0x7ac946ed740c4d2!2sCasablanca%2C%20Morocco!5e0!3m2!1sen!2sus!4v1647043087964!5m2!1sen!2sus"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
