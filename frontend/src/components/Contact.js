@@ -4,13 +4,21 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
+    phone: '+212607720930'
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    console.log(formData);
+    const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+    const newMessage = {
+      ...formData,
+      timestamp: new Date().toISOString()
+    };
+    messages.push(newMessage);
+    localStorage.setItem('contactMessages', JSON.stringify(messages));
+    alert('Message sent successfully!');
+    setFormData({ name: '', email: '', message: '', phone: '+212607720930' });
   };
 
   const handleChange = (e) => {

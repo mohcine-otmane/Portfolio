@@ -1,17 +1,24 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./public/index.html"
-  ],
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        background: '#0a192f',
-        text: '#8892b0',
+        primary: {
+          light: '#60A5FA',
+          dark: '#3B82F6',
+        },
+        background: {
+          light: '#FFFFFF',
+          dark: '#1F2937',
+        },
+        text: {
+          light: '#1F2937',
+          dark: '#F9FAFB',
+        },
         'text-secondary': '#ccd6f6',
         highlight: '#64ffda',
-        primary: '#64ffda',
         secondary: '#8892b0',
         accent: '#64ffda',
         'glass-bg': 'rgba(10, 25, 47, 0.7)',
@@ -56,6 +63,10 @@ module.exports = {
           '100%': { width: 'var(--progress-width)' },
         },
       },
+      transitionProperty: {
+        'height': 'height',
+        'spacing': 'margin, padding',
+      }
     },
   },
   plugins: [],

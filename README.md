@@ -73,3 +73,21 @@ portfolio/
 ## License
 
 MIT 
+
+## Deployment
+
+To deploy the frontend to GitHub Pages:
+
+1. Build the frontend:
+   ```bash
+   cd frontend
+   npm run build
+   ```
+2. Deploy to GitHub Pages:
+   ```bash
+   npm run deploy
+   ```
+
+This will publish the contents of the `build` directory to the `gh-pages` branch of your repository, making your site available at the URL specified in the `homepage` field of `frontend/package.json`.
+
+**Note:** Make sure you have the `gh-pages` package installed and your repository is correctly set up with the proper remote URL. 
