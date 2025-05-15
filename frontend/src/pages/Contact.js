@@ -225,6 +225,7 @@ const Contact = () => {
               <h3 className="text-xl font-semibold text-white mb-4">Location</h3>
               <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
                 <iframe
+                  title="Google Maps - Casablanca, Morocco"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d212270.3177328395!2d-7.6824492!3d33.5731104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda76b871f50c5c1%3A0x7ac946ed740c4d2!2sCasablanca%2C%20Morocco!5e0!3m2!1sen!2sus!4v1647043087964!5m2!1sen!2sus"
                   width="100%"
                   height="100%"

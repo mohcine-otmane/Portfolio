@@ -7,14 +7,12 @@ import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import Skills from './components/Skills';
 import { ThemeProvider } from './context/ThemeContext';
-import ThemeToggle from './components/ThemeToggle';
 import './App.css';
 
 function App() {
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-300">
-        <ThemeToggle />
+      <div className="min-h-screen bg-main text-main transition-colors duration-300">
         <Navbar />
         <main className="lg:ml-64 transition-all duration-300">
           <Routes>

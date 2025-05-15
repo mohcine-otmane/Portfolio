@@ -2,6 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background: 26 26 26;
+  --foreground: 255 255 255;
+  --card: 23 23 23;
+  --card-foreground: 255 255 255;
+  --primary: 59 130 246;
+  --primary-foreground: 255 255 255;
+  --secondary: 96 165 250;
+  --secondary-foreground: 255 255 255;
+  --accent: 16 185 129;
+  --accent-foreground: 255 255 255;
+  --border: 255 255 255 0.1;
+  --input: 71 85 105;
+  --muted: 39 39 52;
+  --muted-foreground: 255 255 255;
+  --ring: 59 130 246;
+  --shadow-color: 0,0,0;
+  --radius: 0.75rem;
+}
+
+body {
+  @apply bg-background text-foreground transition-colors duration-300;
+}
+
+.glass-card {
+  @apply bg-card text-card-foreground shadow-card border border-border rounded-xl transition-all duration-300;
+  backdrop-filter: blur(16px);
+}
+
+/* Use the variables for all backgrounds and text */
+.bg-main {
+  @apply bg-background text-foreground;
+}
+
+.text-main {
+  @apply text-foreground;
+}
+
+/* Gradient text using primary/secondary */
+.gradient-text {
+  background: linear-gradient(to right, rgb(var(--primary)), rgb(var(--secondary)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
 @layer utilities {
   .animation-delay-200 {
     animation-delay: 200ms;
@@ -32,41 +79,16 @@
   }
 }
 
-:root {
-  /* Modern Dark Theme with Enhanced Visibility */
-  --background: 15 15 20;
-  --foreground: 255 255 255;
-  --primary: 124 58 237;
-  --primary-foreground: 255 255 255;
-  --secondary: 168 85 247;
-  --secondary-foreground: 255 255 255;
-  --accent: 244 114 182;
-  --accent-foreground: 255 255 255;
-  --muted: 39 39 52;
-  --muted-foreground: 255 255 255;
-  --card: 30 30 40;
-  --card-foreground: 255 255 255;
-  --border: 71 85 105;
-  --input: 71 85 105;
-  --ring: 124 58 237;
-  --radius: 0.75rem;
-}
-
 @layer base {
-  body {
-    @apply bg-background text-white min-h-screen;
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
-
   h1, h2, h3, h4, h5, h6, p, span, div {
-    @apply text-white;
+    @apply text-foreground transition-colors duration-300;
   }
 }
 
 @layer components {
   /* Glass Effects */
   .glass-card {
-    @apply bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-lg border border-glass-border shadow-lg text-white rounded-xl relative overflow-hidden transition-all duration-300;
+    @apply bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-lg border border-glassborder shadow-lg text-main rounded-xl relative overflow-hidden transition-all duration-300;
     transform: translateZ(0);
     will-change: transform;
   }
@@ -78,9 +100,9 @@
       90deg,
       transparent 0%,
       transparent 45%,
-      rgba(255, 255, 255, 0.1) 48%,
-      rgba(255, 255, 255, 0.2) 50%,
-      rgba(255, 255, 255, 0.1) 52%,
+      rgba(var(--foreground), 0.1) 48%,
+      rgba(var(--foreground), 0.2) 50%,
+      rgba(var(--foreground), 0.1) 52%,
       transparent 55%,
       transparent 100%
     );
@@ -91,7 +113,7 @@
   }
 
   .glass-bg {
-    @apply bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm border border-glass-border text-white rounded-xl relative overflow-hidden;
+    @apply bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm border border-glassborder text-main rounded-xl relative overflow-hidden;
   }
 
   .glass-bg::before {
@@ -101,9 +123,9 @@
       90deg,
       transparent 0%,
       transparent 45%,
-      rgba(255, 255, 255, 0.2) 48%,
-      rgba(255, 255, 255, 0.4) 50%,
-      rgba(255, 255, 255, 0.2) 52%,
+      rgba(var(--foreground), 0.2) 48%,
+      rgba(var(--foreground), 0.4) 50%,
+      rgba(var(--foreground), 0.2) 52%,
       transparent 55%,
       transparent 100%
     );
@@ -114,7 +136,7 @@
   }
 
   .glass-border {
-    @apply border-2 border-glass-border rounded-xl relative overflow-hidden;
+    @apply border-2 border-glassborder rounded-xl relative overflow-hidden;
   }
 
   .glass-border::before {
@@ -137,8 +159,24 @@
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary font-semibold;
+    background: linear-gradient(to right, theme('colors.primary.DEFAULT'), theme('colors.secondary.DEFAULT'));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 600;
     will-change: background-position;
+  }
+
+  .dark .gradient-text {
+    background: linear-gradient(to right, theme('colors.primary.dark'), theme('colors.secondary.dark'));
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .light .gradient-text {
+    background: linear-gradient(to right, theme('colors.primary.light'), theme('colors.secondary.light'));
+    -webkit-background-clip: text;
+    background-clip: text;
   }
 
   .gradient-border {

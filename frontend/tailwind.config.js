@@ -1,72 +1,40 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./public/index.html"
+  ],
   darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        primary: {
-          light: '#60A5FA',
-          dark: '#3B82F6',
-        },
-        background: {
-          light: '#FFFFFF',
-          dark: '#1F2937',
-        },
-        text: {
-          light: '#1F2937',
-          dark: '#F9FAFB',
-        },
-        'text-secondary': '#ccd6f6',
-        highlight: '#64ffda',
-        secondary: '#8892b0',
-        accent: '#64ffda',
-        'glass-bg': 'rgba(10, 25, 47, 0.7)',
-        'glass-border': 'rgba(100, 255, 218, 0.1)',
-        card: 'rgba(10, 25, 47, 0.9)',
-        border: '#8892b0',
-        muted: '#1f2937',
-        ring: '#64ffda',
-        input: '#8892b0',
+        background: 'rgb(var(--background) / <alpha-value>)',
+        foreground: 'rgb(var(--foreground) / <alpha-value>)',
+        card: 'rgb(var(--card) / <alpha-value>)',
+        'card-foreground': 'rgb(var(--card-foreground) / <alpha-value>)',
+        primary: 'rgb(var(--primary) / <alpha-value>)',
+        'primary-foreground': 'rgb(var(--primary-foreground) / <alpha-value>)',
+        secondary: 'rgb(var(--secondary) / <alpha-value>)',
+        'secondary-foreground': 'rgb(var(--secondary-foreground) / <alpha-value>)',
+        accent: 'rgb(var(--accent) / <alpha-value>)',
+        'accent-foreground': 'rgb(var(--accent-foreground) / <alpha-value>)',
+        border: 'rgb(var(--border) / <alpha-value>)',
+        input: 'rgb(var(--input) / <alpha-value>)',
+        muted: 'rgb(var(--muted) / <alpha-value>)',
+        'muted-foreground': 'rgb(var(--muted-foreground) / <alpha-value>)',
+        ring: 'rgb(var(--ring) / <alpha-value>)',
+        glassborder: 'rgb(var(--glass-border) / <alpha-value>)',
+      },
+      boxShadow: {
+        card: '0 4px 32px rgba(var(--shadow-color, 0,0,0), 0.08)',
+      },
+      borderRadius: {
+        xl: 'var(--radius)',
       },
       animation: {
-        'fadeIn': 'fadeIn 0.3s ease-in-out',
-        'slideInLeft': 'slideInLeft 0.5s ease-out forwards',
-        'slideInRight': 'slideInRight 0.5s ease-out forwards',
-        'slideInUp': 'slideInUp 0.5s ease-out forwards',
-        'slideInDown': 'slideInDown 0.5s ease-out forwards',
-        'progress': 'progress 1s ease-out forwards',
+        'spin-slow': 'spin 8s linear infinite',
+        'spin-very-slow': 'spin 30s linear infinite',
       },
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        slideInLeft: {
-          '0%': { transform: 'translateX(-100%)', opacity: '0' },
-          '100%': { transform: 'translateX(0)', opacity: '1' },
-        },
-        slideInRight: {
-          '0%': { transform: 'translateX(100%)', opacity: '0' },
-          '100%': { transform: 'translateX(0)', opacity: '1' },
-        },
-        slideInUp: {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        slideInDown: {
-          '0%': { transform: 'translateY(-20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        progress: {
-          '0%': { width: '0%' },
-          '100%': { width: 'var(--progress-width)' },
-        },
-      },
-      transitionProperty: {
-        'height': 'height',
-        'spacing': 'margin, padding',
-      }
     },
   },
   plugins: [],

@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   MdMenu,
-  MdClose
+  MdClose,
+  MdEmail,
+  MdWhatsapp
 } from 'react-icons/md';
 import { 
   RiHome4Fill,
@@ -13,7 +15,6 @@ import {
   RiLinkedinFill,
   RiTwitterFill
 } from 'react-icons/ri';
-import { FaReact } from 'react-icons/fa';
 import logo from '../logo.png';
 
 const Navbar = () => {
@@ -75,7 +76,7 @@ const Navbar = () => {
       shadowX,
       shadowY,
       intensity: elementIntensity,
-      distance
+      distance: distance
     };
   };
 
@@ -149,7 +150,7 @@ const Navbar = () => {
   const socialLinks = [
     {
       icon: <RiGithubFill className="w-5 h-5" />,
-      href: 'https://github.com',
+      href: 'https://github.com/mohcine-otmane',
       color: 'text-[#181717]',
       hoverColor: 'group-hover:text-[#2D2D2D]',
       bgColor: 'bg-[#181717]/10',
@@ -159,7 +160,7 @@ const Navbar = () => {
     },
     {
       icon: <RiLinkedinFill className="w-5 h-5" />,
-      href: 'https://linkedin.com',
+      href: 'https://www.linkedin.com/in/mohcine-otmane-024b2582/',
       color: 'text-[#0A66C2]',
       hoverColor: 'group-hover:text-[#0B7DE3]',
       bgColor: 'bg-[#0A66C2]/10',
@@ -168,14 +169,24 @@ const Navbar = () => {
       animation: 'group-hover:animate-pulse'
     },
     {
-      icon: <RiTwitterFill className="w-5 h-5" />,
-      href: 'https://twitter.com',
-      color: 'text-[#1DA1F2]',
-      hoverColor: 'group-hover:text-[#4AB4F4]',
-      bgColor: 'bg-[#1DA1F2]/10',
-      hoverBgColor: 'group-hover:bg-[#1DA1F2]/20',
-      glowColor: 'group-hover:shadow-[#1DA1F2]/20',
-      animation: 'group-hover:animate-wiggle'
+      icon: <MdEmail className="w-5 h-5" />,
+      href: 'mailto:mohcine.otmane@ensem.ac.ma',
+      color: 'text-[#EA4335]',
+      hoverColor: 'group-hover:text-[#F5655C]',
+      bgColor: 'bg-[#EA4335]/10',
+      hoverBgColor: 'group-hover:bg-[#EA4335]/20',
+      glowColor: 'group-hover:shadow-[#EA4335]/20',
+      animation: 'group-hover:animate-pulse'
+    },
+    {
+      icon: <MdWhatsapp className="w-5 h-5" />,
+      href: 'https://wa.me/212670728010',
+      color: 'text-[#25D366]',
+      hoverColor: 'group-hover:text-[#28E56C]',
+      bgColor: 'bg-[#25D366]/10',
+      hoverBgColor: 'group-hover:bg-[#25D366]/20',
+      glowColor: 'group-hover:shadow-[#25D366]/20',
+      animation: 'group-hover:animate-bounce'
     }
   ];
 
@@ -257,27 +268,57 @@ const Navbar = () => {
 
           {/* Social Links */}
           <div className="mt-auto flex flex-col space-y-4 w-full px-2">
-            {socialLinks.map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              className="group relative flex items-center justify-center"
-                onMouseEnter={() => setHoveredItem(`social-${index}`)}
-                onMouseLeave={() => setHoveredItem(null)}
-            >
-                <div 
-                  className={`p-2 rounded-xl ${item.bgColor} ${item.hoverBgColor} transition-all duration-300 ${item.glowColor} group-hover:shadow-lg relative overflow-hidden`}
-                  style={getLightStyle(this)}
-            >
-                  <div className={`${item.color} ${item.hoverColor} transform group-hover:scale-110 transition-all duration-300 ${item.animation}`}>
-                    {item.icon}
+            <div className="relative w-16 h-16 mx-auto group">
+              {/* Outer rotating circle */}
+              <div className="absolute inset-0 rounded-full border-2 border-white/20 group-hover:border-primary/50 transition-all duration-500 group-hover:animate-spin-slow"></div>
+              
+              {/* Inner pulsing circle */}
+              <div className="absolute inset-2 rounded-full border border-white/10 group-hover:border-secondary/30 transition-all duration-500 animate-pulse"></div>
+              
+              {/* Gradient background */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              {/* Center dot */}
+              <div className="absolute inset-[45%] rounded-full bg-white/20 group-hover:bg-primary/30 transition-all duration-500"></div>
+              
+              <div className="absolute inset-0 flex items-center justify-center">
+                {socialLinks.map((item, index) => {
+                  const angle = (index * 90) % 360; // 90 degrees between each icon
+                  const radius = 24; // Increased radius for better spacing
+                  const x = Math.cos((angle * Math.PI) / 180) * radius;
+                  const y = Math.sin((angle * Math.PI) / 180) * radius;
+                  
+                  return (
+                    <a
+                      key={index}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group/social absolute transform transition-all duration-500"
+                      style={{
+                        transform: `translate(${x}px, ${y}px)`,
+                        transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
+                      }}
+                      onMouseEnter={() => setHoveredItem(`social-${index}`)}
+                      onMouseLeave={() => setHoveredItem(null)}
+                    >
+                      <div 
+                        className={`p-2 rounded-xl ${item.bgColor} ${item.hoverBgColor} transition-all duration-300 ${item.glowColor} group-hover/social:shadow-lg relative overflow-hidden group-hover/social:scale-110`}
+                        style={getLightStyle(this)}
+                      >
+                        <div className={`${item.color} ${item.hoverColor} transform transition-all duration-300 ${item.animation}`}>
+                          {item.icon}
+                        </div>
+                        {/* Shine effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover/social:opacity-100 transition-opacity duration-300 transform group-hover/social:translate-x-full"></div>
+                        {/* Glow effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/social:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 blur-sm"></div>
+                      </div>
+                    </a>
+                  );
+                })}
               </div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:translate-x-full"></div>
-              </div>
-              </a>
-            ))}
+            </div>
           </div>
         </div>
       </nav>

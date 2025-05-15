@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaTwitter, FaReact, FaNodeJs, FaPython, FaAws, FaDocker, FaJava, FaGitAlt, FaDatabase, FaPhp } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaTwitter, FaReact, FaNodeJs, FaPython, FaAws, FaDocker, FaJava, FaGitAlt, FaPhp } from 'react-icons/fa';
 import { SiTypescript, SiMongodb, SiGraphql, SiCplusplus, SiCmake, SiSpringboot, SiHibernate, SiMysql } from 'react-icons/si';
 import { HiArrowRight, HiArrowNarrowRight } from 'react-icons/hi';
-import { BsCodeSlash, BsLaptop, BsServer } from 'react-icons/bs';
+import { BsLaptop, BsServer } from 'react-icons/bs';
 
 // Custom SFML Icon Component
 const SFMLIcon = () => (
   <svg 
-    className="w-8 h-8" 
+    className="w-6 h-6" 
     viewBox="0 0 24 24" 
     fill="none" 
     xmlns="http://www.w3.org/2000/svg"
@@ -34,69 +34,86 @@ const SFMLIcon = () => (
 );
 
 const Home = () => {
+  const [isIconHovered, setIsIconHovered] = useState(false);
+  const [hoveredTech, setHoveredTech] = useState(null);
+  const [lastHoveredTech, setLastHoveredTech] = useState(null);
+  const techStack = [
+    { name: "PHP", icon: <FaPhp className="w-6 h-6 text-[#777BB4]" /> },
+    { name: "Python", icon: <FaPython className="w-6 h-6 text-[#3776AB]" /> },
+    { name: "Java", icon: <FaJava className="w-6 h-6 text-[#007396]" /> },
+    { name: "Spring Boot", icon: <SiSpringboot className="w-6 h-6 text-[#6DB33F]" /> },
+    { name: "C++", icon: <SiCplusplus className="w-6 h-6 text-[#00599C]" /> },
+    { name: "SFML", icon: <SFMLIcon /> },
+    { name: "CMake", icon: <SiCmake className="w-6 h-6 text-[#064F8C]" /> },
+    { name: "MySQL", icon: <SiMysql className="w-6 h-6 text-[#4479A1]" /> },
+    { name: "Hibernate", icon: <SiHibernate className="w-6 h-6 text-[#BCAE79]" /> },
+    { name: "Git", icon: <FaGitAlt className="w-6 h-6 text-[#F05032]" /> },
+    { name: "Linux", icon: <FaDocker className="w-6 h-6 text-[#2496ED]" /> },
+    { name: "Shell", icon: <FaNodeJs className="w-6 h-6 text-[#339933]" /> }
+  ];
+
+  const defaultTech = techStack.find(t => t.name === 'Git');
+
   const featuredProjects = [
     {
-      title: "E-Commerce Platform",
-      description: "A full-stack e-commerce solution with real-time inventory management",
-      tech: ["React", "Node.js", "MongoDB"],
-      link: "/projects",
-      icon: <BsLaptop className="w-8 h-8 text-primary" />
+      title: "SFML",
+      description: "Contribution au développement de la bibliothèque SFML, amélioration des performances et correction de bugs",
+      tech: ["C++", "SFML", "CMake"],
+      link: "https://github.com/SFML/SFML",
+      icon: <SFMLIcon />
     },
     {
-      title: "Task Management App",
-      description: "Collaborative project management tool with real-time updates",
-      tech: ["React", "Firebase", "Material-UI"],
-      link: "/projects",
-      icon: <BsServer className="w-8 h-8 text-primary" />
+      title: "OBS Studio",
+      description: "Contribution au développement d'OBS Studio, amélioration des fonctionnalités de streaming",
+      tech: ["C++", "Qt", "FFmpeg"],
+      link: "https://github.com/obsproject/obs-studio",
+      icon: <BsLaptop className="w-8 h-8 text-primary" />
     }
   ];
 
   const timeline = [
     {
       year: "2023",
-      title: "Senior Full Stack Developer",
-      company: "TechCorp",
-      description: "Leading development of enterprise-scale applications"
+      title: "Développeur FullStack",
+      company: "Freelance",
+      description: "Développement d'applications web et mobiles avec PHP, Python, Java et Spring Boot"
+    },
+    {
+      year: "2022",
+      title: "Ingénieur Développement",
+      company: "INPT",
+      description: "Développement d'applications de gestion et de systèmes d'information"
     },
     {
       year: "2021",
-      title: "Full Stack Developer",
-      company: "StartupX",
-      description: "Built and maintained multiple web applications"
-    },
-    {
-      year: "2019",
-      title: "Junior Developer",
-      company: "WebSolutions",
-      description: "Started my journey in web development"
+      title: "Développeur Backend",
+      company: "ENSEM",
+      description: "Développement d'APIs RESTful et de microservices avec Spring Boot et .NET Core"
     }
   ];
 
   const socialLinks = [
-    { name: "GitHub", icon: <FaGithub />, link: "https://github.com/yourusername" },
-    { name: "LinkedIn", icon: <FaLinkedin />, link: "https://linkedin.com/in/yourusername" },
-    { name: "Twitter", icon: <FaTwitter />, link: "https://twitter.com/yourusername" }
+    { name: "GitHub", icon: <FaGithub />, link: "https://github.com/mohcine-otmane" },
+    { name: "LinkedIn", icon: <FaLinkedin />, link: "https://www.linkedin.com/in/mohcine-otmane-024b2582/" },
+    { name: "Email", icon: <HiArrowNarrowRight />, link: "mailto:mohcine.otmane@ensem.ac.ma" },
+    { name: "Phone", icon: <HiArrowRight />, link: "tel:+212670728010" }
   ];
 
-  const techStack = [
-    { name: "React", icon: <FaReact className="w-8 h-8 text-[#61DAFB]" /> },
-    { name: "Node.js", icon: <FaNodeJs className="w-8 h-8 text-[#339933]" /> },
-    { name: "TypeScript", icon: <SiTypescript className="w-8 h-8 text-[#3178C6]" /> },
-    { name: "Python", icon: <FaPython className="w-8 h-8 text-[#3776AB]" /> },
-    { name: "PHP", icon: <FaPhp className="w-8 h-8 text-[#777BB4]" /> },
-    { name: "MongoDB", icon: <SiMongodb className="w-8 h-8 text-[#47A248]" /> },
-    { name: "MySQL", icon: <SiMysql className="w-8 h-8 text-[#4479A1]" /> },
-    { name: "Hibernate", icon: <SiHibernate className="w-8 h-8 text-[#BCAE79]" /> },
-    { name: "AWS", icon: <FaAws className="w-8 h-8 text-[#FF9900]" /> },
-    { name: "Docker", icon: <FaDocker className="w-8 h-8 text-[#2496ED]" /> },
-    { name: "GraphQL", icon: <SiGraphql className="w-8 h-8 text-[#E10098]" /> },
-    { name: "C++", icon: <SiCplusplus className="w-8 h-8 text-[#00599C]" /> },
-    { name: "SFML", icon: <SFMLIcon /> },
-    { name: "CMake", icon: <SiCmake className="w-8 h-8 text-[#064F8C]" /> },
-    { name: "Java", icon: <FaJava className="w-8 h-8 text-[#007396]" /> },
-    { name: "Spring Boot", icon: <SiSpringboot className="w-8 h-8 text-[#6DB33F]" /> },
-    { name: "Git", icon: <FaGitAlt className="w-8 h-8 text-[#F05032]" /> }
-  ];
+  // Tech stack style mapping for consistent icon backgrounds and effects
+  const techStackStyles = {
+    PHP:    { bgColor: 'bg-[#777BB4]/10', hoverBgColor: 'group-hover:bg-[#777BB4]/20', glowColor: 'group-hover:shadow-[#777BB4]/20', color: 'text-[#777BB4]', animation: 'group-hover:animate-bounce' },
+    Python: { bgColor: 'bg-[#3776AB]/10', hoverBgColor: 'group-hover:bg-[#3776AB]/20', glowColor: 'group-hover:shadow-[#3776AB]/20', color: 'text-[#3776AB]', animation: 'group-hover:animate-pulse' },
+    Java:   { bgColor: 'bg-[#007396]/10', hoverBgColor: 'group-hover:bg-[#007396]/20', glowColor: 'group-hover:shadow-[#007396]/20', color: 'text-[#007396]', animation: 'group-hover:animate-spin-slow' },
+    'Spring Boot': { bgColor: 'bg-[#6DB33F]/10', hoverBgColor: 'group-hover:bg-[#6DB33F]/20', glowColor: 'group-hover:shadow-[#6DB33F]/20', color: 'text-[#6DB33F]', animation: 'group-hover:animate-pulse' },
+    'C++':   { bgColor: 'bg-[#00599C]/10', hoverBgColor: 'group-hover:bg-[#00599C]/20', glowColor: 'group-hover:shadow-[#00599C]/20', color: 'text-[#00599C]', animation: 'group-hover:animate-bounce' },
+    SFML:   { bgColor: 'bg-[#FF6B6B]/10', hoverBgColor: 'group-hover:bg-[#FF6B6B]/20', glowColor: 'group-hover:shadow-[#FF6B6B]/20', color: 'text-[#FF6B6B]', animation: 'group-hover:animate-pulse' },
+    CMake:  { bgColor: 'bg-[#064F8C]/10', hoverBgColor: 'group-hover:bg-[#064F8C]/20', glowColor: 'group-hover:shadow-[#064F8C]/20', color: 'text-[#064F8C]', animation: 'group-hover:animate-spin-slow' },
+    MySQL:  { bgColor: 'bg-[#4479A1]/10', hoverBgColor: 'group-hover:bg-[#4479A1]/20', glowColor: 'group-hover:shadow-[#4479A1]/20', color: 'text-[#4479A1]', animation: 'group-hover:animate-bounce' },
+    Hibernate: { bgColor: 'bg-[#BCAE79]/10', hoverBgColor: 'group-hover:bg-[#BCAE79]/20', glowColor: 'group-hover:shadow-[#BCAE79]/20', color: 'text-[#BCAE79]', animation: 'group-hover:animate-pulse' },
+    Git:    { bgColor: 'bg-[#F05032]/10', hoverBgColor: 'group-hover:bg-[#F05032]/20', glowColor: 'group-hover:shadow-[#F05032]/20', color: 'text-[#F05032]', animation: 'group-hover:animate-bounce' },
+    Linux:  { bgColor: 'bg-[#2496ED]/10', hoverBgColor: 'group-hover:bg-[#2496ED]/20', glowColor: 'group-hover:shadow-[#2496ED]/20', color: 'text-[#2496ED]', animation: 'group-hover:animate-pulse' },
+    Shell:  { bgColor: 'bg-[#339933]/10', hoverBgColor: 'group-hover:bg-[#339933]/20', glowColor: 'group-hover:shadow-[#339933]/20', color: 'text-[#339933]', animation: 'group-hover:animate-spin-slow' },
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -120,7 +137,7 @@ const Home = () => {
   };
 
   return (
-    <section className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-main text-main">
       {/* Animated background elements */}
       <motion.div 
         className="absolute top-0 -left-4 w-72 h-72 bg-primary rounded-full mix-blend-multiply filter blur-xl opacity-20"
@@ -176,8 +193,9 @@ const Home = () => {
                 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 gradient-text leading-tight"
                 variants={itemVariants}
               >
-                Hi, I'm <span className="text-primary">MOHCINE OTMANE</span>
+                Mohcine Otmane
               </motion.h1>
+              <div className="text-lg text-primary font-semibold">Développeur FullStack | Mathématiques Appliquées | Ingénierie Télécom</div>
               <motion.div 
                 className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full"
                 variants={itemVariants}
@@ -185,58 +203,12 @@ const Home = () => {
             </div>
             
             <motion.p 
-              className="text-lg sm:text-xl text-text-secondary mb-8 leading-relaxed"
+              className="text-lg sm:text-xl text-main mb-8 leading-relaxed"
               variants={itemVariants}
             >
-              I'm a full-stack developer passionate about creating beautiful and functional web applications.
-              With expertise in modern web technologies and a keen eye for design, I build solutions that make a difference.
+              Développeur FullStack expérimenté en PHP, Python, Java, Spring Boot, .NET Core et C/C++.<br/>
+              Solide formation en mathématiques appliquées et ingénierie des télécommunications. Passionné par l'open source, Linux et le streaming Shell. Contributeur à des projets open-source comme SFML, OBS Studio et VLC.
             </motion.p>
-
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-4"
-              variants={itemVariants}
-            >
-              <Link
-                to="/projects"
-                className="group relative px-6 sm:px-8 py-3 sm:py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-text font-semibold overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg text-center"
-              >
-                <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
-                <span className="relative flex items-center justify-center gap-2">
-                    View Projects
-                  <HiArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
-                </span>
-              </Link>
-              <Link
-                to="/contact"
-                className="group relative px-6 sm:px-8 py-3 sm:py-4 rounded-lg border-2 border-glass-border text-text overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg text-center"
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <span className="relative flex items-center justify-center gap-2">
-                    Contact Me
-                  <HiArrowNarrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
-                </span>
-              </Link>
-            </motion.div>
-
-            {/* Social Links */}
-            <motion.div 
-              className="flex justify-center gap-6 pt-4"
-              variants={itemVariants}
-            >
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-text-secondary hover:text-primary transition-colors duration-300"
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <span className="text-2xl">{social.icon}</span>
-                </motion.a>
-              ))}
-            </motion.div>
           </div>
         </motion.div>
 
@@ -305,32 +277,71 @@ const Home = () => {
           </div>
         </motion.div>
 
-        {/* Quick Skills Preview */}
+        {/* Tech Stack Section */}
         <motion.div 
-          className="max-w-4xl mx-auto glass-card p-8"
+          className="glass-card p-6 sm:p-8 md:p-12 max-w-4xl mx-auto"
           variants={itemVariants}
         >
-          <h2 className="text-3xl font-bold mb-8 text-center gradient-text">Tech Stack</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-            {techStack.map((tech, index) => (
-              <motion.div 
-                key={index} 
-                className="flex flex-col items-center p-4 rounded-lg bg-primary/5 hover:bg-primary/10 transition-colors duration-300 group"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <div className="mb-2 transform group-hover:scale-110 transition-transform duration-300">
-                  {tech.icon}
+          <h2 className="text-2xl sm:text-3xl font-bold mb-8 gradient-text text-center">Tech Stack</h2>
+          <div className="relative w-96 h-96 mx-auto group">
+            {/* Animated icons circle */}
+            <div
+              className="absolute inset-0 icons-circle animate-spin-very-slow"
+              style={{ animationPlayState: isIconHovered ? 'paused' : 'running' }}
+            >
+              {techStack.map((tech, index) => {
+                const total = techStack.length;
+                const angle = (index / total) * 2 * Math.PI;
+                const angleDeg = (index / total) * 360;
+                const radius = 172;
+                const x = Math.cos(angle) * radius;
+                const y = Math.sin(angle) * radius;
+                return (
+                  <div
+                    key={index}
+                    className="absolute"
+                    style={{
+                      left: `calc(50% + ${x}px)` ,
+                      top: `calc(50% + ${y}px)` ,
+                      transform: `translate(-50%, -50%) rotate(${angleDeg}deg)`
+                    }}
+                    onMouseEnter={() => { setIsIconHovered(true); setHoveredTech(tech); setLastHoveredTech(tech); }}
+                    onMouseLeave={() => { setIsIconHovered(false); setHoveredTech(null); }}
+                  >
+                    <div className={`p-4 rounded-2xl shadow-lg transition-all duration-300 relative overflow-visible flex items-center justify-center 
+                      ${techStackStyles[tech.name]?.bgColor || 'bg-white/10'} 
+                      ${techStackStyles[tech.name]?.hoverBgColor?.replace('group-hover', 'hover') || ''} 
+                      ${techStackStyles[tech.name]?.glowColor?.replace('group-hover', 'hover') || ''} 
+                      hover:scale-110 
+                      ${techStackStyles[tech.name]?.animation?.replace('group-hover', 'hover') || ''}`}
+                    >
+                      <div className={`w-5 h-5 flex items-center justify-center ${techStackStyles[tech.name]?.color || ''}`}>
+                        {tech.icon}
+                      </div>
+                    </div>
+                    {/* Tech name */}
+                    <div className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 text-xs font-medium text-center opacity-0 hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+                      {tech.name}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            {/* Center dot */}
+            <div className="absolute left-1/2 top-1/2 flex items-center justify-center" style={{transform:'translate(-50%,-50%)', zIndex: 10}}>
+              <div className={`flex flex-col items-center transition-all duration-500 ease-in-out`}>
+                <div className={`w-24 h-24 flex items-center justify-center rounded-2xl shadow-xl bg-white/10 transition-all duration-500 ease-in-out relative ${techStackStyles[(hoveredTech || lastHoveredTech || defaultTech).name]?.bgColor || ''}`}>
+                  {/* Glow effect */}
+                  <div className={`absolute inset-0 rounded-2xl pointer-events-none blur-xl opacity-70 transition-all duration-500 ease-in-out 
+                    ${techStackStyles[(hoveredTech || lastHoveredTech || defaultTech).name]?.glowColor?.replace('group-hover', '') || 'shadow-[0_0_40px_10px_rgba(240,80,50,0.4)]'}`} />
+                  <span className={`w-16 h-16 flex items-center justify-center relative z-10 transition-all duration-500 ease-in-out ${techStackStyles[(hoveredTech || lastHoveredTech || defaultTech).name]?.color || ''}`}>{(hoveredTech || lastHoveredTech || defaultTech).icon}</span>
                 </div>
-                <span className="text-lg font-medium text-text">{tech.name}</span>
-              </motion.div>
-            ))}
-        </div>
-          <div className="text-center mt-8">
-            <Link to="/skills" className="text-primary hover:text-secondary transition-colors duration-300 flex items-center justify-center gap-2">
-              View all skills <HiArrowRight className="w-4 h-4" />
-            </Link>
-      </div>
+                <div className="mt-2 text-lg font-bold text-center text-main drop-shadow-lg transition-all duration-500 ease-in-out">
+                  {(hoveredTech || lastHoveredTech || defaultTech).name}
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </motion.div>
     </section>
