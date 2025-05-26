@@ -198,9 +198,9 @@ const Navbar = () => {
         className="lg:hidden fixed top-4 right-4 z-[100] p-2 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 hover:shadow-lg hover:shadow-white/10"
       >
         {isOpen ? (
-          <MdClose className="w-6 h-6 text-white transform hover:rotate-90 transition-all duration-300" />
+          <MdClose className="w-6 h-6 text-white icon-glow transform hover:rotate-90 transition-all duration-300" />
         ) : (
-          <MdMenu className="w-6 h-6 text-white transform hover:rotate-90 transition-all duration-300" />
+          <MdMenu className="w-6 h-6 text-white icon-glow transform hover:rotate-90 transition-all duration-300" />
         )}
       </button>
 
@@ -229,9 +229,8 @@ const Navbar = () => {
                 setActiveItem('/');
               }}
             >
-              <div className="relative">
-                <div className="absolute inset-0 bg-[#61DAFB]/20 rounded-full blur-lg group-hover:blur-xl transition-all duration-300"></div>
-                <img src={logo} alt="Logo" className="w-12 h-12 object-contain bg-white rounded-full shadow-lg p-1 border-2 border-gray-200 transition-transform duration-700 group-hover:scale-110 group-hover:shadow-[0_0_24px_4px_rgba(33,150,243,0.4)] group-hover:rotate-360" />
+              <div className="relative icon-glow">
+                <img src={logo} alt="Logo" className="w-12 h-12 object-contain bg-white rounded-full shadow-lg p-1 border-2 border-gray-200 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-360" />
               </div>
             </Link>
           </div>
@@ -239,7 +238,7 @@ const Navbar = () => {
           {/* Navigation Items */}
           <div className="flex flex-col space-y-8 w-full px-2">
             {navItems.map((item, index) => (
-            <Link
+              <Link
                 key={index}
                 to={item.path}
                 className={`group relative flex items-center justify-center ${activeItem === item.path ? 'scale-110' : ''}`}
@@ -249,20 +248,19 @@ const Navbar = () => {
                 }}
                 onMouseEnter={() => setHoveredItem(item.path)}
                 onMouseLeave={() => setHoveredItem(null)}
-            >
+              >
                 <div 
                   className={`p-3 rounded-xl ${item.bgColor} ${item.hoverBgColor} transition-all duration-300 ${item.glowColor} group-hover:shadow-lg relative overflow-hidden`}
                   style={getLightStyle(this)}
                 >
-                  <div className={`${item.color} ${item.hoverColor} transform group-hover:scale-110 transition-all duration-300 ${item.animation}`}>
+                  <div className={`icon-glow ${item.color} ${item.hoverColor} transform group-hover:scale-110 transition-all duration-300 ${item.animation}`}>
                     {item.icon}
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:translate-x-full"></div>
-              </div>
+                </div>
                 <span className={`absolute left-full ml-2 px-2 py-1 bg-white/10 backdrop-blur-sm rounded-lg text-sm font-medium text-white opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap transform group-hover:translate-x-1 ${hoveredItem === item.path ? 'animate-fadeIn' : ''}`}>
                   {item.label}
-              </span>
-            </Link>
+                </span>
+              </Link>
             ))}
           </div>
 
@@ -283,8 +281,8 @@ const Navbar = () => {
               
               <div className="absolute inset-0 flex items-center justify-center">
                 {socialLinks.map((item, index) => {
-                  const angle = (index * 90) % 360; // 90 degrees between each icon
-                  const radius = 24; // Increased radius for better spacing
+                  const angle = (index * 90) % 360;
+                  const radius = 24;
                   const x = Math.cos((angle * Math.PI) / 180) * radius;
                   const y = Math.sin((angle * Math.PI) / 180) * radius;
                   
@@ -306,13 +304,9 @@ const Navbar = () => {
                         className={`p-2 rounded-xl ${item.bgColor} ${item.hoverBgColor} transition-all duration-300 ${item.glowColor} group-hover/social:shadow-lg relative overflow-hidden group-hover/social:scale-110`}
                         style={getLightStyle(this)}
                       >
-                        <div className={`${item.color} ${item.hoverColor} transform transition-all duration-300 ${item.animation}`}>
+                        <div className={`icon-glow ${item.color} ${item.hoverColor} transform transition-all duration-300 ${item.animation}`}>
                           {item.icon}
                         </div>
-                        {/* Shine effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover/social:opacity-100 transition-opacity duration-300 transform group-hover/social:translate-x-full"></div>
-                        {/* Glow effect */}
-                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/social:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 blur-sm"></div>
                       </div>
                     </a>
                   );

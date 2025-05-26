@@ -152,16 +152,30 @@ const IconShowcase = () => {
                 {set.icons.map((item, idx) => (
                   <div
                     key={idx}
-                    className="group relative flex flex-col items-center p-4 rounded-lg transition-all duration-300 hover:bg-white/10"
+                    className="absolute"
+                    style={{
+                      left: `calc(50% + ${calculateLightEffect(this).x}px)` ,
+                      top: `calc(50% + ${calculateLightEffect(this).y}px)` ,
+                      transform: `translate(-50%, -50%) rotate(${calculateLightEffect(this).shadowX * 2}deg)`
+                    }}
+                    onMouseEnter={() => { setIsIconHovered(true); setHoveredTech(item); setLastHoveredTech(item); }}
+                    onMouseLeave={() => { setIsIconHovered(false); setHoveredTech(null); }}
                   >
-                    <div className={`relative ${item.color} group-hover:scale-110 transition-all duration-300`}>
-                      <div className={`absolute inset-0 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${item.glow}`}></div>
-                      {item.icon}
+                    <div className={`p-4 rounded-2xl shadow-lg transition-all duration-300 relative overflow-visible flex items-center justify-center 
+                      ${techStackStyles[item.name]?.bgColor || 'bg-white/10'} 
+                      ${techStackStyles[item.name]?.hoverBgColor?.replace('group-hover', 'hover') || ''} 
+                      ${techStackStyles[item.name]?.glowColor?.replace('group-hover', 'hover') || ''} 
+                      hover:scale-110 
+                      ${techStackStyles[item.name]?.animation?.replace('group-hover', 'hover') || ''}`}
+                    >
+                      <div className={`w-5 h-5 flex items-center justify-center icon-glow ${techStackStyles[item.name]?.color || ''}`}>
+                        {item.icon}
+                      </div>
                     </div>
-                    <span className="mt-2 text-sm text-gray-300 group-hover:text-white transition-colors duration-300 transform group-hover:translate-y-1">
+                    {/* Tech name */}
+                    <div className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 text-xs font-medium text-center opacity-0 hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
                       {item.name}
-                    </span>
-                    <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
                   </div>
                 ))}
               </div>

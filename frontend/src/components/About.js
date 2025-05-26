@@ -7,7 +7,9 @@ const About = () => {
     <div className="min-h-screen py-20 relative">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center mb-8">
-          <img src={profile} alt="Profile" className="w-40 h-40 rounded-full shadow-xl border-4 border-white object-cover bg-white/80" />
+          <div className="relative icon-glow">
+            <img src={profile} alt="Profile" className="w-40 h-40 rounded-full shadow-xl border-4 border-white object-cover bg-white/80" />
+          </div>
           <h1 className="mt-4 text-3xl font-bold text-white tracking-wide">MOHCINE OTMANE</h1>
         </div>
         <h2 className="text-4xl font-bold text-center mb-16 animate-slideInDown">
@@ -18,7 +20,9 @@ const About = () => {
           {/* Philosophy Section */}
           <div className="glass-card p-8 animate-fadeIn animation-delay-200">
             <div className="flex items-center gap-4 mb-6">
-              <FaCode className="text-3xl text-primary" />
+              <div className="icon-glow">
+                <FaCode className="text-3xl text-primary" />
+              </div>
               <h3 className="text-2xl font-semibold">My Philosophy</h3>
             </div>
             <p className="text-gray-300 leading-relaxed">
@@ -31,39 +35,45 @@ const About = () => {
           {/* Technical Expertise Section */}
           <div className="glass-card p-8 animate-fadeIn animation-delay-300">
             <div className="flex items-center gap-4 mb-6">
-              <FaServer className="text-3xl text-secondary" />
+              <div className="icon-glow">
+                <FaServer className="text-3xl text-secondary" />
+              </div>
               <h3 className="text-2xl font-semibold">Technical Expertise</h3>
             </div>
             <p className="text-gray-300 leading-relaxed">
-              With expertise in modern web technologies, I specialize in building scalable 
-              applications using React, Node.js, and cloud services. I'm passionate about 
-              staying current with emerging technologies and best practices.
+              With expertise in both frontend and backend development, I create seamless, 
+              scalable applications that deliver exceptional user experiences. My focus is on 
+              writing clean, maintainable code and implementing best practices.
             </p>
           </div>
 
-          {/* Background Section */}
+          {/* Education Section */}
           <div className="glass-card p-8 animate-fadeIn animation-delay-400">
             <div className="flex items-center gap-4 mb-6">
-              <FaGraduationCap className="text-3xl text-accent" />
-              <h3 className="text-2xl font-semibold">Background</h3>
+              <div className="icon-glow">
+                <FaGraduationCap className="text-3xl text-accent" />
+              </div>
+              <h3 className="text-2xl font-semibold">Education</h3>
             </div>
             <p className="text-gray-300 leading-relaxed">
-              My journey in software development began with a strong foundation in computer science 
-              and has evolved through hands-on experience in various industries. I've worked on 
-              projects ranging from enterprise applications to innovative startups.
+              I hold a degree in Computer Science and continuously expand my knowledge through 
+              self-learning and practical experience. I stay current with the latest technologies 
+              and industry trends.
             </p>
           </div>
 
-          {/* Current Focus Section */}
+          {/* Goals Section */}
           <div className="glass-card p-8 animate-fadeIn animation-delay-500">
             <div className="flex items-center gap-4 mb-6">
-              <FaRocket className="text-3xl text-primary" />
-              <h3 className="text-2xl font-semibold">Current Focus</h3>
+              <div className="icon-glow">
+                <FaRocket className="text-3xl text-primary" />
+              </div>
+              <h3 className="text-2xl font-semibold">Goals</h3>
             </div>
             <p className="text-gray-300 leading-relaxed">
-              Currently, I'm focused on building modern web applications with a strong emphasis 
-              on performance, accessibility, and user experience. I'm particularly interested 
-              in exploring the intersection of AI and web development.
+              My goal is to contribute to innovative projects that make a positive impact. 
+              I'm passionate about creating solutions that help businesses grow and improve 
+              people's lives through technology.
             </p>
           </div>
         </div>

@@ -29,13 +29,19 @@ const Home = () => {
           </div>
           <div className="flex justify-center gap-6 animate-fadeIn animation-delay-600">
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-primary transition-colors">
-              <FaGithub />
+              <div className="icon-glow">
+                <FaGithub />
+              </div>
             </a>
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-primary transition-colors">
-              <FaLinkedin />
+              <div className="icon-glow">
+                <FaLinkedin />
+              </div>
             </a>
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-primary transition-colors">
-              <FaTwitter />
+              <div className="icon-glow">
+                <FaTwitter />
+              </div>
             </a>
           </div>
         </div>
