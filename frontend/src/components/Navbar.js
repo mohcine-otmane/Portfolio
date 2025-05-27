@@ -230,7 +230,13 @@ const Navbar = () => {
               }}
             >
               <div className="relative icon-glow">
-                <img src={logo} alt="Logo" className="w-12 h-12 object-contain bg-white rounded-full shadow-lg p-1 border-2 border-gray-200 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-360" />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 animate-pulse"></div>
+                <img 
+                  src={logo} 
+                  alt="Logo" 
+                  className="relative w-12 h-12 object-contain bg-white rounded-full p-1 border-2 border-gray-200 transition-all duration-[3s] group-hover:scale-110 group-hover:rotate-[3600deg] shadow-[0_0_15px_rgba(255,255,255,0.3),0_0_30px_rgba(255,255,255,0.2),0_0_45px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_20px_rgba(255,255,255,0.4),0_0_40px_rgba(255,255,255,0.3),0_0_60px_rgba(255,255,255,0.2),0_0_80px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_20px_var(--primary-color),0_0_40px_var(--secondary-color),0_0_60px_var(--accent-color)]" 
+                />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
               </div>
             </Link>
           </div>

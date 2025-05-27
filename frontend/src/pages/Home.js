@@ -140,7 +140,7 @@ const Home = () => {
     <section className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-main text-main">
       {/* Animated background elements */}
       <motion.div 
-        className="absolute top-0 -left-4 w-72 h-72 bg-primary rounded-full mix-blend-multiply filter blur-xl opacity-20"
+        className="absolute top-0 -left-4 w-72 h-72 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-10 z-0"
         animate={{
           scale: [1, 1.2, 1],
           rotate: [0, 90, 0],
@@ -152,7 +152,7 @@ const Home = () => {
         }}
       />
       <motion.div 
-        className="absolute top-0 -right-4 w-72 h-72 bg-secondary rounded-full mix-blend-multiply filter blur-xl opacity-20"
+        className="absolute top-0 -right-4 w-72 h-72 bg-secondary rounded-full mix-blend-multiply filter blur-3xl opacity-10 z-0"
         animate={{
           scale: [1.2, 1, 1.2],
           rotate: [90, 0, 90],
@@ -164,7 +164,7 @@ const Home = () => {
         }}
       />
       <motion.div 
-        className="absolute -bottom-8 left-20 w-72 h-72 bg-accent rounded-full mix-blend-multiply filter blur-xl opacity-20"
+        className="absolute -bottom-8 left-20 w-72 h-72 bg-accent rounded-full mix-blend-multiply filter blur-3xl opacity-10 z-0"
         animate={{
           scale: [1, 1.2, 1],
           rotate: [0, -90, 0],
@@ -177,7 +177,7 @@ const Home = () => {
       />
 
       <motion.div 
-        className="container mx-auto relative space-y-20"
+        className="container mx-auto relative space-y-20 z-10"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
