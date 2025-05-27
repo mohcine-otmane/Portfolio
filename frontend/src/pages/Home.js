@@ -193,7 +193,7 @@ const Home = () => {
                 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 gradient-text leading-tight"
                 variants={itemVariants}
               >
-                Mohcine Otmane
+                MOHCINE OTMANE
               </motion.h1>
               <div className="text-lg text-primary font-semibold">Développeur FullStack | Mathématiques Appliquées | Ingénierie Télécom</div>
               <motion.div 
