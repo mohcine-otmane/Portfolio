@@ -25,11 +25,27 @@ const Contact = () => {
     setSubmitStatus(null);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch('http://localhost:5000/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
+      console.error('Error sending message:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -40,14 +56,14 @@ const Contact = () => {
     {
       icon: <FaEnvelope className="w-6 h-6" />,
       title: 'Email',
-      content: 'your.email@example.com',
-      link: 'mailto:your.email@example.com',
+      content: 'otmanemohcine30@gmail.com',
+      link: 'mailto:otmanemohcine30@gmail.com',
     },
     {
       icon: <FaPhone className="w-6 h-6" />,
       title: 'Phone',
-      content: '+1 (555) 123-4567',
-      link: 'tel:+15551234567',
+      content: '+212607720930',
+      link: 'tel:+212607720930',
     },
     {
       icon: <FaMapMarkerAlt className="w-6 h-6" />,
@@ -92,95 +108,6 @@ const Contact = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div className="glass-card p-8 animate-fadeIn">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                  Name
-                </label>
-              <input
-                type="text"
-                  id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                  className="w-full px-4 py-3 bg-background/50 border border-glass-border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
-                  placeholder="Your name"
-              />
-            </div>
-
-            <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                  Email
-                </label>
-              <input
-                type="email"
-                  id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                  className="w-full px-4 py-3 bg-background/50 border border-glass-border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-background/50 border border-glass-border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
-                  placeholder="What's this about?"
-              />
-            </div>
-
-            <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                  Message
-                </label>
-              <textarea
-                  id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                  rows={4}
-                  className="w-full px-4 py-3 bg-background/50 border border-glass-border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all resize-none"
-                  placeholder="Your message..."
-              />
-            </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full btn py-3 px-6 text-center transition-all duration-300"
-              >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </button>
-
-              {submitStatus === 'success' && (
-                <p className="text-green-400 text-center mt-4 animate-fadeIn">
-                  Message sent successfully! I'll get back to you soon.
-                </p>
-              )}
-
-              {submitStatus === 'error' && (
-                <p className="text-red-400 text-center mt-4 animate-fadeIn">
-                  Oops! Something went wrong. Please try again later.
-                </p>
-              )}
-          </form>
-        </div>
-
           {/* Contact Information */}
           <div className="space-y-8 animate-fadeIn delay-200">
             {/* Contact Cards */}
@@ -220,7 +147,7 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Map or Additional Info */}
+            {/* Map */}
             <div className="glass-card p-6">
               <h3 className="text-xl font-semibold text-white mb-4">Location</h3>
               <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
@@ -237,6 +164,90 @@ const Contact = () => {
                 />
               </div>
             </div>
+          </div>
+
+          {/* Contact Form */}
+          <div className="bg-background/30 backdrop-blur-xl border border-gray-600/20 rounded-xl p-8 animate-fadeIn delay-300">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 bg-background/30 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent hover:border-gray-500 transition-colors duration-200"
+                  placeholder="Your name"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 bg-background/30 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent hover:border-gray-500 transition-colors duration-200"
+                  placeholder="your.email@example.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 bg-background/30 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent hover:border-gray-500 transition-colors duration-200"
+                  placeholder="What's this about?"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows="6"
+                  className="w-full px-4 py-2 bg-background/30 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent hover:border-gray-500 transition-colors duration-200 resize-none"
+                  placeholder="Your message here..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-3 px-6 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </button>
+
+              {submitStatus === 'success' && (
+                <p className="text-green-400 text-center">Message sent successfully!</p>
+              )}
+              {submitStatus === 'error' && (
+                <p className="text-red-400 text-center">Failed to send message. Please try again.</p>
+              )}
+            </form>
           </div>
         </div>
       </div>

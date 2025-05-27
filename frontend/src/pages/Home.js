@@ -143,7 +143,7 @@ const Home = () => {
         className="absolute top-0 -left-4 w-72 h-72 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-10 z-0"
         animate={{
           scale: [1, 1.2, 1],
-          rotate: [0, 90, 0],
+          rotate: [0, 180, 360],
         }}
         transition={{
           duration: 20,
@@ -155,7 +155,7 @@ const Home = () => {
         className="absolute top-0 -right-4 w-72 h-72 bg-secondary rounded-full mix-blend-multiply filter blur-3xl opacity-10 z-0"
         animate={{
           scale: [1.2, 1, 1.2],
-          rotate: [90, 0, 90],
+          rotate: [0, -180, -360],
         }}
         transition={{
           duration: 20,
@@ -167,7 +167,7 @@ const Home = () => {
         className="absolute -bottom-8 left-20 w-72 h-72 bg-accent rounded-full mix-blend-multiply filter blur-3xl opacity-10 z-0"
         animate={{
           scale: [1, 1.2, 1],
-          rotate: [0, -90, 0],
+          rotate: [0, 180, 360],
         }}
         transition={{
           duration: 20,
@@ -309,10 +309,9 @@ const Home = () => {
                     onMouseLeave={() => { setIsIconHovered(false); setHoveredTech(null); }}
                   >
                     <div className={`p-4 rounded-2xl shadow-lg transition-all duration-300 relative overflow-visible flex items-center justify-center 
-                      ${techStackStyles[tech.name]?.bgColor || 'bg-white/10'} 
+                      ${techStackStyles[tech.name]?.bgColor || 'bg-white/10'} hover:scale-110 hover:shadow-2xl
                       ${techStackStyles[tech.name]?.hoverBgColor?.replace('group-hover', 'hover') || ''} 
                       ${techStackStyles[tech.name]?.glowColor?.replace('group-hover', 'hover') || ''} 
-                      hover:scale-110 
                       ${techStackStyles[tech.name]?.animation?.replace('group-hover', 'hover') || ''}`}
                     >
                       <div className={`w-5 h-5 flex items-center justify-center ${techStackStyles[tech.name]?.color || ''}`}>
